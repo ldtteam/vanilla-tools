@@ -8,3 +8,8 @@
 build/
 
 gradle/
+
+*.class
+
+classes/
+run/

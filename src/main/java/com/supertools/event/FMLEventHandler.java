@@ -56,8 +56,7 @@ public class FMLEventHandler
             for (BlockPos pos : getAffectedPos(event.getPlayer()))
             {
                 final IBlockState state = world.getBlockState(pos);
-
-                if (item.getToolClasses(mainHand).stream().anyMatch(tool -> tool.equals(state.getBlock().getHarvestTool(state))))
+                if (item.getToolClasses(mainHand).stream().filter(tool -> tool.equals(state.getBlock().getHarvestTool(state))).anyMatch(tool -> state.getBlock().isToolEffective(tool, state)))
                 {
                     state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                     world.setBlockToAir(pos);
@@ -130,15 +129,13 @@ public class FMLEventHandler
             final World world = player.getEntityWorld();
             final BlockPos vector = event.getPos().subtract(player.getPosition());
             final EnumFacing facing = EnumFacing.getFacingFromVector(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
-            final IBlockState state = world.getBlockState(event.getPos());
             this.curBlockDamageMP += event.getNewSpeed();
             final ItemStack mainHand = event.getEntityPlayer().getHeldItemMainhand();
 
             for (BlockPos pos : getAffectedPos(player))
             {
                 final IBlockState theState = world.getBlockState(pos);
-
-                if (item.getToolClasses(mainHand).stream().anyMatch(tool -> tool.equals(theState.getBlock().getHarvestTool(theState))))
+                if (item.getToolClasses(mainHand).stream().filter(tool -> tool.equals(theState.getBlock().getHarvestTool(theState))).anyMatch(tool -> theState.getBlock().isToolEffective(tool, theState)))
                 {
                     SuperTools.getNetwork()
                       .sendToAllAround(new BlockParticleEffectMessage(pos, world.getBlockState(pos), facing.getIndex()),
