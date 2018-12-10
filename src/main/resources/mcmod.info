@@ -1,0 +1,14 @@
+[
+{
+  "modid": "supertools",
+  "name": "Vanilla+ Tools",
+  "description": "3x3 Mining and Digging tools in Vanilla flavor",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://minecolonies.com",
+  "updateUrl": "",
+  "authorList": ["Let's Dev Together"],
+  "screenshots": [],
+  "dependencies": []
+}
+]
