@@ -113,7 +113,7 @@ jar {
     from sourceSets.main.output
 
     manifest {
-        attributes 'FMLAT': "SuperTools_at.cfg",
+        attributes 'FMLAT': 'supertools_at.cfg',
         'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}"
     }
 }
