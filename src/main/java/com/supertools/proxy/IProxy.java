@@ -38,19 +38,13 @@ public interface IProxy
     void registerEntityRendering();
 
     /**
-     * Opens a shape tool window.
-     *
-     * @param pos coordinates.
-     */
-    void openShapeToolWindow(final BlockPos pos);
-
-    /**
      * Registers all block and item renderer.
      */
     void registerRenderer();
 
     /**
      * Method to get a side specific world from a message context anywhere.
+     * @param dimension the dimension.
      * @return The world.
      */
     @Nullable

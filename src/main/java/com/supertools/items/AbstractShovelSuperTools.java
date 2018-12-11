@@ -18,6 +18,7 @@ public abstract class AbstractShovelSuperTools extends ItemSpade
      * Sets the name, creative tab, and registers the item.
      *
      * @param name The name of this item
+     * @param material the material.
      */
     public AbstractShovelSuperTools(final String name, final ToolMaterial material)
     {

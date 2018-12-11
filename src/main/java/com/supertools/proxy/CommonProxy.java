@@ -99,22 +99,12 @@ public class CommonProxy implements IProxy
     }
 
     @Override
-    public void openShapeToolWindow(final BlockPos pos)
-    {
-        /*
-         * Intentionally left empty.
-         */
-    }
-
-
-    @Override
     public void registerRenderer()
     {
         /*
          * Intentionally left empty.
          */
     }
-
 
     @Nullable
     @Override

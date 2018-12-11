@@ -19,6 +19,7 @@ public abstract class AbstractHammerSuperTools extends ItemPickaxe
      * Sets the name, creative tab, and registers the item.
      *
      * @param name The name of this item
+     * @param material the material.
      */
     public AbstractHammerSuperTools(final String name, final ToolMaterial material)
     {
