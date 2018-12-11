@@ -12,12 +12,14 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -47,16 +49,16 @@ public class FMLEventHandler
     @SubscribeEvent
     public void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
     {
-        final Item item = event.getPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem();
-        if (item instanceof AbstractHammerSuperTools
-              || item instanceof AbstractShovelSuperTools)
+        final ItemStack item = event.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
+        if (item.getItem() instanceof AbstractHammerSuperTools
+              || item.getItem() instanceof AbstractShovelSuperTools)
         {
             final ItemStack mainHand = event.getPlayer().getHeldItemMainhand();
             final World world = event.getPlayer().getEntityWorld();
             for (BlockPos pos : getAffectedPos(event.getPlayer()))
             {
                 final IBlockState state = world.getBlockState(pos);
-                if (item.getToolClasses(mainHand).stream().filter(tool -> tool.equals(state.getBlock().getHarvestTool(state))).anyMatch(tool -> state.getBlock().isToolEffective(tool, state)))
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item))
                 {
                     state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                     world.setBlockToAir(pos);
@@ -121,21 +123,20 @@ public class FMLEventHandler
     @SubscribeEvent
     public void on(final PlayerEvent.BreakSpeed event)
     {
-        final Item item = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem();
-        if (item instanceof AbstractHammerSuperTools
-              || item instanceof AbstractShovelSuperTools)
+        final ItemStack item = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+        if (item.getItem() instanceof AbstractHammerSuperTools
+              || item.getItem() instanceof AbstractShovelSuperTools)
         {
             final EntityPlayer player = event.getEntityPlayer();
             final World world = player.getEntityWorld();
             final BlockPos vector = event.getPos().subtract(player.getPosition());
             final EnumFacing facing = EnumFacing.getFacingFromVector(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
             this.curBlockDamageMP += event.getNewSpeed();
-            final ItemStack mainHand = event.getEntityPlayer().getHeldItemMainhand();
 
             for (BlockPos pos : getAffectedPos(player))
             {
                 final IBlockState theState = world.getBlockState(pos);
-                if (item.getToolClasses(mainHand).stream().filter(tool -> tool.equals(theState.getBlock().getHarvestTool(theState))).anyMatch(tool -> theState.getBlock().isToolEffective(tool, theState)))
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item))
                 {
                     SuperTools.getNetwork()
                       .sendToAllAround(new BlockParticleEffectMessage(pos, world.getBlockState(pos), facing.getIndex()),
