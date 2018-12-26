@@ -3,24 +3,22 @@ package com.supertools.event;
 import com.supertools.SuperTools;
 import com.supertools.coremod.network.BlockParticleEffectMessage;
 import com.supertools.items.AbstractHammerSuperTools;
-import com.supertools.items.AbstractItemSuperTools;
 import com.supertools.items.AbstractShovelSuperTools;
-import com.supertools.items.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -28,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * Event handler used to catch various forge events.
@@ -58,7 +55,7 @@ public class FMLEventHandler
             for (BlockPos pos : getAffectedPos(event.getPlayer()))
             {
                 final IBlockState state = world.getBlockState(pos);
-                if (ForgeHooks.canToolHarvestBlock(world, pos, item))
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item) || item.canHarvestBlock(state))
                 {
                     state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                     world.setBlockToAir(pos);
@@ -67,6 +64,39 @@ public class FMLEventHandler
         }
     }
 
+    @SubscribeEvent
+    public void onItemRightClick(final PlayerInteractEvent.RightClickBlock event)
+    {
+        if (!event.getWorld().isRemote)
+        {
+            final ItemStack item = event.getItemStack();
+            if (item.getItem() instanceof AbstractShovelSuperTools)
+            {
+                final EntityPlayer player = event.getEntityPlayer();
+                final World world = event.getWorld();
+                if (player.canPlayerEdit(event.getPos(), event.getFace(), event.getItemStack()))
+                {
+                    for (BlockPos pos : getAffectedPos(event.getEntityPlayer()))
+                    {
+                        if (event.getFace() != EnumFacing.DOWN && world.getBlockState(pos.up()).getMaterial() == Material.AIR && world.getBlockState(pos).getBlock() == Blocks.GRASS)
+                        {
+                            IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
+                            world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                            world.setBlockState(pos, iblockstate1, 11);
+                        }
+                    }
+                    item.damageItem(1, player);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get all affected pos for a player with a tool.
+     *
+     * @param player the player.
+     * @return the list of affected positions.
+     */
     public List<BlockPos> getAffectedPos(final EntityPlayer player)
     {
         final List<BlockPos> list = new ArrayList<>();
@@ -135,11 +165,11 @@ public class FMLEventHandler
 
             for (BlockPos pos : getAffectedPos(player))
             {
-                final IBlockState theState = world.getBlockState(pos);
-                if (ForgeHooks.canToolHarvestBlock(world, pos, item))
+                final IBlockState theBlock = world.getBlockState(pos);
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item) || item.canHarvestBlock(theBlock))
                 {
                     SuperTools.getNetwork()
-                      .sendToAllAround(new BlockParticleEffectMessage(pos, world.getBlockState(pos), facing.getIndex()),
+                      .sendToAllAround(new BlockParticleEffectMessage(pos, theBlock, facing.getIndex()),
                         new NetworkRegistry.TargetPoint(player.world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10));
                     world.sendBlockBreakProgress(player.getEntityId(), pos, (int) (curBlockDamageMP * 10.0F) - 1);
                 }
