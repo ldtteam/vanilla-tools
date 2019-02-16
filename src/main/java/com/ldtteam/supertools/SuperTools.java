@@ -39,7 +39,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber
 @Mod(Constants.MOD_ID)
 public class SuperTools
 {
@@ -271,5 +270,10 @@ public class SuperTools
           BlockParticleEffectMessage::encode,
           BlockParticleEffectMessage::decode,
           BlockParticleEffectMessage::onMessage);
+    }
+
+    public static ResourceLocation location(final String path)
+    {
+        return new ResourceLocation(Constants.MOD_ID, path);
     }
 }

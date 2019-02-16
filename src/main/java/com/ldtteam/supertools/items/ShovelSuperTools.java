@@ -22,8 +22,7 @@ public class ShovelSuperTools extends ItemSpade
     public ShovelSuperTools(final IItemTier tier, final int attackDamageIn, float attackSpeedIn, final Item.Properties builder)
     {
         super(tier, attackDamageIn, attackSpeedIn, builder);
-        this.setRegistryName("hammer" + tier.toString());
-        final NonNullList<ItemStack> item = NonNullList.create();
+        this.setRegistryName("hammer" + tier.toString());        final NonNullList<ItemStack> item = NonNullList.create();
         item.add(new ItemStack(this));
         fillItemGroup(ModCreativeTabs.SUPER_TOOLS, item);
     }
