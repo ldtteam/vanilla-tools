@@ -13,3 +13,5 @@ gradle/
 
 classes/
 run/
+
+out/
