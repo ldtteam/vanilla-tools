@@ -5,7 +5,7 @@ package com.ldtteam.supertools.api.util.constant;
  */
 public final class Constants
 {
-    public static final String MOD_ID = "com/ldtteam/supertools";
+    public static final String MOD_ID = "supertools";
 
     /**
      * Private constructor to hide implicit public one.

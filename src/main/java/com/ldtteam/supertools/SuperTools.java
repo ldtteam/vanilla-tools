@@ -22,10 +22,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -81,9 +84,7 @@ public class SuperTools
 
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, this::registerItems);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onBlockBreak);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onItemRightClick);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::breakSpeed);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     /**
@@ -112,7 +113,8 @@ public class SuperTools
      *
      * @param event {@link net.minecraftforge.event.world.BlockEvent.BreakEvent}
      */
-    private void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
+    @SubscribeEvent
+    public void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
     {
         final ItemStack item = event.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
         if (item.getItem() instanceof HammerSuperTools
@@ -123,7 +125,9 @@ public class SuperTools
             for (BlockPos pos : getAffectedPos(event.getPlayer()))
             {
                 final IBlockState state = world.getBlockState(pos);
-                if (ForgeHooks.canToolHarvestBlock(world, pos, item) || item.canHarvestBlock(state))
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item)
+                      || item.canHarvestBlock(state)
+                      || (item.getItem() instanceof ShovelSuperTools && (state.getMaterial() == Material.SAND || state.getMaterial() == Material.GRASS || state.getMaterial() == Material.GROUND || state.getMaterial() == Material.CLAY)))
                 {
                     state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -137,7 +141,8 @@ public class SuperTools
      *
      * @param event the called event.
      */
-    private void onItemRightClick(@NotNull final PlayerInteractEvent.RightClickBlock event)
+    @SubscribeEvent
+    public void onItemRightClick(@NotNull final PlayerInteractEvent.RightClickBlock event)
     {
         if (!event.getWorld().isRemote)
         {
@@ -151,7 +156,7 @@ public class SuperTools
                     for (BlockPos pos : getAffectedPos(event.getEntityPlayer()))
                     {
                         if (event.getFace() != EnumFacing.DOWN && world.getBlockState(pos.up()).getMaterial() == Material.AIR
-                              && world.getBlockState(pos).getBlock() == Blocks.GRASS)
+                              && world.getBlockState(pos).getBlock() == Blocks.GRASS_BLOCK)
                         {
                             IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
                             world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -228,7 +233,8 @@ public class SuperTools
      *
      * @param event the event.
      */
-    private void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
+    @SubscribeEvent
+    public void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
     {
         final ItemStack item = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
         if (item.getItem() instanceof HammerSuperTools
@@ -247,11 +253,14 @@ public class SuperTools
                 {
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, theBlock, facing.getIndex());
                     final Chunk chunk = world.getChunk(pos);
-                    ((WorldServer) world).getPlayerChunkMap()
-                      .getEntry(chunk.x, chunk.z)
-                      .getWatchingPlayers()
-                      .forEach(p -> channel.sendTo(pEM, p.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT));
-                    world.sendBlockBreakProgress(player.getEntityId(), pos, (int) (curBlockDamageMP * 10.0F) - 1);
+                    if (world instanceof WorldServer)
+                    {
+                        ((WorldServer) world).getPlayerChunkMap()
+                          .getEntry(chunk.x, chunk.z)
+                          .getWatchingPlayers()
+                          .forEach(p -> channel.sendTo(pEM, p.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT));
+                        world.sendBlockBreakProgress(player.getEntityId(), pos, (int) (curBlockDamageMP * 10.0F) - 1);
+                    }
                 }
             }
         }

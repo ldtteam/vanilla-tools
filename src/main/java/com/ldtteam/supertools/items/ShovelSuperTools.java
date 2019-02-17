@@ -1,11 +1,12 @@
 package com.ldtteam.supertools.items;
 
-import com.ldtteam.supertools.creativetab.ModCreativeTabs;
+import com.ldtteam.supertools.api.util.constant.Constants;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.Locale;
 
 /**
  * Handles simple things that all items need.
@@ -22,8 +23,6 @@ public class ShovelSuperTools extends ItemSpade
     public ShovelSuperTools(final IItemTier tier, final int attackDamageIn, float attackSpeedIn, final Item.Properties builder)
     {
         super(tier, attackDamageIn, attackSpeedIn, builder);
-        this.setRegistryName("hammer" + tier.toString());        final NonNullList<ItemStack> item = NonNullList.create();
-        item.add(new ItemStack(this));
-        fillItemGroup(ModCreativeTabs.SUPER_TOOLS, item);
+        this.setRegistryName(new ResourceLocation(Constants.MOD_ID, "shovel" + tier.toString().toLowerCase(Locale.ENGLISH)));
     }
 }

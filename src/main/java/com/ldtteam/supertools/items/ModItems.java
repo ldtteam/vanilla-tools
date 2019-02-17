@@ -1,10 +1,10 @@
 package com.ldtteam.supertools.items;
 
+import com.ldtteam.supertools.api.util.constant.Constants;
 import com.ldtteam.supertools.creativetab.ModCreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * Class handling the registering of the mod items.
@@ -14,16 +14,34 @@ import net.minecraftforge.registries.IForgeRegistry;
 @SuppressWarnings({"squid:ClassVariableVisibilityCheck", "squid:S2444", "squid:S1444"})
 public final class ModItems
 {
+    @ObjectHolder(Constants.MOD_ID + ":hammerwood")
     public static Item woodenHammer;
+
+    @ObjectHolder(Constants.MOD_ID + ":hammerstone")
     public static Item stoneHammer;
+
+    @ObjectHolder(Constants.MOD_ID + ":hammeriron")
     public static Item ironHammer;
+
+    @ObjectHolder(Constants.MOD_ID + ":hammergold")
     public static Item goldHammer;
+
+    @ObjectHolder(Constants.MOD_ID + ":hammerdiamond")
     public static Item diaHammer;
 
+    @ObjectHolder(Constants.MOD_ID + ":shovelwood")
     public static Item woodenShovel;
+
+    @ObjectHolder(Constants.MOD_ID + ":shovelstone")
     public static Item stoneShovel;
+
+    @ObjectHolder(Constants.MOD_ID + ":shoveliron")
     public static Item ironShovel;
+
+    @ObjectHolder(Constants.MOD_ID + ":shovelgold")
     public static Item goldShovel;
+
+    @ObjectHolder(Constants.MOD_ID + ":shoveldiamond")
     public static Item diaShovel;
 
     /**
