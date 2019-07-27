@@ -13,5 +13,6 @@ gradle/
 
 classes/
 run/
+runClient/
 
 out/
