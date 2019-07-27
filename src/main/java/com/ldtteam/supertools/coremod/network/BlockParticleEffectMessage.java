@@ -1,21 +1,20 @@
 package com.ldtteam.supertools.coremod.network;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Handles the server telling nearby clients to render a particle effect.
  */
-public class BlockParticleEffectMessage
+public class BlockParticleEffectMessage implements IMessage
 {
     /**
      * The position.
@@ -25,7 +24,7 @@ public class BlockParticleEffectMessage
     /**
      * The blockstate.
      */
-    private IBlockState block;
+    private BlockState block;
 
     /**
      * The enumside.
@@ -47,14 +46,15 @@ public class BlockParticleEffectMessage
      * @param state Block State
      * @param side  Side of the block causing effect
      */
-    public BlockParticleEffectMessage(final BlockPos pos, @NotNull final IBlockState state, final int side)
+    public BlockParticleEffectMessage(final BlockPos pos, @NotNull final BlockState state, final int side)
     {
         this.pos = pos;
         this.block = state;
         this.side = side;
     }
 
-    public void fromBytes(@NotNull final ByteBuf buf)
+    @Override
+    public void fromBytes(@NotNull final PacketBuffer buf)
     {
         final int x = buf.readInt();
         final int y = buf.readInt();
@@ -64,29 +64,26 @@ public class BlockParticleEffectMessage
         side = buf.readInt();
     }
 
-    public void toBytes(@NotNull final ByteBuf buf)
+    @Nullable
+    @Override
+    public LogicalSide getExecutionSide()
+    {
+        return LogicalSide.CLIENT;
+    }
+
+    @Override
+    public void onExecute(final NetworkEvent.Context ctxIn, final boolean isLogicalServer)
+    {
+        Minecraft.getInstance().particles.addBlockHitEffects(pos, Direction.byIndex(side));
+    }
+
+    @Override
+    public void toBytes(@NotNull final PacketBuffer buf)
     {
         buf.writeInt(pos.getX());
         buf.writeInt(pos.getY());
         buf.writeInt(pos.getZ());
         buf.writeInt(Block.BLOCK_STATE_IDS.get(block));
         buf.writeInt(side);
-    }
-
-    public static void encode(BlockParticleEffectMessage message, PacketBuffer packet)
-    {
-        message.toBytes(packet);
-    }
-
-    public static BlockParticleEffectMessage decode(PacketBuffer packet)
-    {
-        BlockParticleEffectMessage message = new BlockParticleEffectMessage();
-        message.fromBytes(packet);
-        return message;
-    }
-
-    public static void onMessage(final BlockParticleEffectMessage message, Supplier<NetworkEvent.Context> context)
-    {
-        Minecraft.getInstance().particles.addBlockHitEffects(message.pos, EnumFacing.byIndex(message.side));
     }
 }

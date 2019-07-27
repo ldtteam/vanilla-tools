@@ -1,28 +1,27 @@
 package com.ldtteam.supertools.items;
 
-import com.ldtteam.supertools.api.util.constant.Constants;
+import com.ldtteam.supertools.creativetab.ModCreativeTabs;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.PickaxeItem;
+import net.minecraftforge.common.ToolType;
 
 import java.util.Locale;
 
 /**
  * Handles simple things that all items need.
  */
-public class HammerSuperTools extends ItemPickaxe
+public class HammerSuperTools extends PickaxeItem
 {
     /**
      * Setups the super tool.
      * @param tier the tier of it.
      * @param attackDamageIn the incoming attack damage.
      * @param attackSpeedIn the attack speed.
-     * @param builder the builder.
      */
-    public HammerSuperTools(final IItemTier tier, final int attackDamageIn, float attackSpeedIn, final Item.Properties builder)
+    public HammerSuperTools(final IItemTier tier, final int attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, builder);
-        this.setRegistryName(new ResourceLocation(Constants.MOD_ID, "hammer" + tier.toString().toLowerCase(Locale.ENGLISH)));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().group(ModCreativeTabs.SUPER_TOOLS).addToolType(ToolType.PICKAXE, tier.getHarvestLevel()));
+        this.setRegistryName("hammer" + tier.toString().toLowerCase(Locale.ENGLISH));
     }
 }
