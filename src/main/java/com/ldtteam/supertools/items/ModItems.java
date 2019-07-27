@@ -60,18 +60,17 @@ public final class ModItems
      */
     public static void init(final IForgeRegistry<Item> registry)
     {
-        final Item.Properties properties = new Item.Properties().group(ModCreativeTabs.SUPER_TOOLS);
-        woodenHammer = new HammerSuperTools(ItemTier.WOOD, (int) ItemTier.WOOD.getAttackDamage(), 0, properties);
-        stoneHammer = new HammerSuperTools(ItemTier.STONE, (int) ItemTier.STONE.getAttackDamage(), 0, properties);
-        ironHammer = new HammerSuperTools(ItemTier.IRON, (int) ItemTier.IRON.getAttackDamage(), 0, properties);
-        goldHammer = new HammerSuperTools(ItemTier.GOLD, (int) ItemTier.GOLD.getAttackDamage(), 0, properties);
-        diaHammer = new HammerSuperTools(ItemTier.DIAMOND, (int) ItemTier.DIAMOND.getAttackDamage(), 0, properties);
+        woodenHammer = new HammerSuperTools(ItemTier.WOOD, 1, -2.8F);
+        stoneHammer = new HammerSuperTools(ItemTier.STONE, 1, -2.8F);
+        ironHammer = new HammerSuperTools(ItemTier.IRON, 1, -2.8F);
+        goldHammer = new HammerSuperTools(ItemTier.GOLD, 1, -2.8F);
+        diaHammer = new HammerSuperTools(ItemTier.DIAMOND, 1, -2.8F);
 
-        woodenShovel = new ShovelSuperTools(ItemTier.WOOD, (int) ItemTier.WOOD.getAttackDamage(), 0, properties);
-        stoneShovel = new ShovelSuperTools(ItemTier.STONE, (int) ItemTier.STONE.getAttackDamage(), 0, properties);
-        ironShovel = new ShovelSuperTools(ItemTier.IRON, (int) ItemTier.IRON.getAttackDamage(), 0, properties);
-        goldShovel = new ShovelSuperTools(ItemTier.GOLD, (int) ItemTier.GOLD.getAttackDamage(), 0, properties);
-        diaShovel = new ShovelSuperTools(ItemTier.DIAMOND, (int) ItemTier.DIAMOND.getAttackDamage(), 0, properties);
+        woodenShovel = new ShovelSuperTools(ItemTier.WOOD, 1.5F, -3.0F);
+        stoneShovel = new ShovelSuperTools(ItemTier.STONE, 1.5F, -3.0F);
+        ironShovel = new ShovelSuperTools(ItemTier.IRON, 1.5F, -3.0F);
+        goldShovel = new ShovelSuperTools(ItemTier.GOLD, 1.5F, -3.0F);
+        diaShovel = new ShovelSuperTools(ItemTier.DIAMOND, 1.5F, -3.0F);
 
         registry.register(woodenHammer);
         registry.register(stoneHammer);
