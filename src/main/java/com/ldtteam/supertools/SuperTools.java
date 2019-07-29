@@ -24,7 +24,7 @@ public class SuperTools
     public SuperTools()
     {
         Mod.EventBusSubscriber.Bus.MOD.bus().get().register(LifecycleSubscriber.class);
-        Mod.EventBusSubscriber.Bus.MOD.bus().get().register(WorldEvents.class);
+        Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(WorldEvents.class);
     }
 
     /**
