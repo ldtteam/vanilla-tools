@@ -72,7 +72,7 @@ public class WorldEvents
     public static List<BlockPos> getAffectedPos(@NotNull final PlayerEntity player)
     {
         final List<BlockPos> list = new ArrayList<>();
-        final RayTraceResult rayTrace = Item.rayTrace(player.world, player, RayTraceContext.FluidMode.ANY);
+        final RayTraceResult rayTrace = Item.rayTrace(player.world, player, RayTraceContext.FluidMode.NONE);
 
         if (rayTrace instanceof BlockRayTraceResult)
         {
