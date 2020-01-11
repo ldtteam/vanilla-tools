@@ -6,14 +6,11 @@ import com.ldtteam.supertools.items.HammerSuperTools;
 import com.ldtteam.supertools.items.ShovelSuperTools;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
@@ -22,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -54,7 +50,7 @@ public class WorldEvents
             {
                 final BlockState state = world.getBlockState(pos);
 
-                if (ForgeHooks.isToolEffective(world, pos, mainHand))
+                if (ForgeHooks.canToolHarvestBlock(world, pos, item))
                 {
                     state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -130,15 +126,15 @@ public class WorldEvents
     @SubscribeEvent
     public static void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
     {
-        final ItemStack item = event.getEntityPlayer().getHeldItem(Hand.MAIN_HAND);
+        final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
         if (item.getItem() instanceof HammerSuperTools
               || item.getItem() instanceof ShovelSuperTools)
         {
-            final PlayerEntity player = event.getEntityPlayer();
+            final PlayerEntity player = event.getPlayer();
             final World world = player.getEntityWorld();
             final BlockPos vector = event.getPos().subtract(player.getPosition());
             final Direction facing = Direction.getFacingFromVector(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
-            final ItemStack mainHand = event.getEntityPlayer().getHeldItemMainhand();
+            final ItemStack mainHand = event.getPlayer().getHeldItemMainhand();
 
             for (BlockPos pos : getAffectedPos(player))
             {
