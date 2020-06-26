@@ -4,9 +4,10 @@ import com.ldtteam.supertools.SuperTools;
 import com.ldtteam.supertools.util.constant.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -24,6 +25,7 @@ public class NetworkChannel
     /**
      * Forge network channel
      */
+
     private final        SimpleChannel rawChannel;
 
     /**
@@ -125,11 +127,11 @@ public class NetworkChannel
      * Sends to everyone in dimension.
      *
      * @param msg message to send
-     * @param dim target dimension
+     * @param key target dimension
      */
-    public void sendToDimension(final IMessage msg, final DimensionType dim)
+    public void sendToDimension(final IMessage msg, final RegistryKey<World> key)
     {
-        rawChannel.send(PacketDistributor.DIMENSION.with(() -> dim), msg);
+        rawChannel.send(PacketDistributor.DIMENSION.with(() -> key), msg);
     }
 
     /**

@@ -48,7 +48,7 @@ public class ShovelSuperTools extends ShovelItem
                     {
                         for (final BlockPos pos : WorldEvents.getAffectedPos(player))
                         {
-                            BlockState blockstate = field_195955_e.get(world.getBlockState(pos).getBlock());
+                            BlockState blockstate = SHOVEL_LOOKUP.get(world.getBlockState(pos).getBlock());
                             if (world.getBlockState(pos.up()).isAir(world, pos.up()) && blockstate != null)
                             {
                                 BlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
