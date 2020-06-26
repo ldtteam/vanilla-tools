@@ -112,7 +112,7 @@ public class WorldEvents
                         final ToolItem toolItem = (ToolItem) tool.getB().getItem();
                         if (tool.getB().getDestroySpeed(target) >= toolItem.getTier().getEfficiency()
                               && stack.getToolTypes().contains(tool.getA())
-                              && stack.getHarvestLevel(forgeTool, playerEntity, target) >= target.getHarvestLevel())
+                              && (target.getHarvestLevel() == 0 || stack.getHarvestLevel(forgeTool, playerEntity, target) >= target.getHarvestLevel()))
                         {
                             return true;
                         }
