@@ -56,19 +56,23 @@ public class WorldEvents
     @SubscribeEvent
     public static void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
     {
-        final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
-        if (item.getItem() instanceof HammerSuperTools
-              || item.getItem() instanceof ShovelSuperTools)
+        if (event.getState().isSolid())
         {
-            final ItemStack mainHand = event.getPlayer().getHeldItemMainhand();
-            final World world = event.getPlayer().getEntityWorld();
-            for (BlockPos pos : getAffectedPos(event.getPlayer()))
+            final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
+            if (item.getItem() instanceof HammerSuperTools
+                  || item.getItem() instanceof ShovelSuperTools)
             {
-                final BlockState state = world.getBlockState(pos);
-                if (isBestTool(state, world, pos, item, event.getPlayer()))
+                final ItemStack mainHand = event.getPlayer().getHeldItemMainhand();
+                final World world = event.getPlayer().getEntityWorld();
+                final double hardness = event.getState().getBlockHardness(world, event.getPos());
+                for (BlockPos pos : getAffectedPos(event.getPlayer()))
                 {
-                    state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
-                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    final BlockState state = world.getBlockState(pos);
+                    if (hardness*2 >= state.getBlockHardness(world, pos) && isBestTool(state, world, pos, item, event.getPlayer()))
+                    {
+                        state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    }
                 }
             }
         }
@@ -216,8 +220,8 @@ public class WorldEvents
     public static void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
     {
         final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
-        if (item.getItem() instanceof HammerSuperTools
-              || item.getItem() instanceof ShovelSuperTools)
+        if (event.getPos() != null && (item.getItem() instanceof HammerSuperTools
+              || item.getItem() instanceof ShovelSuperTools))
         {
             final PlayerEntity player = event.getPlayer();
             final World world = player.getEntityWorld();
