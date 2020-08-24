@@ -8,9 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.GlazedTerracottaBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
@@ -97,8 +95,8 @@ public class WorldEvents
 
     private static boolean isBestTool(final BlockState target, final IWorld world, final BlockPos pos, final ItemStack stack, final PlayerEntity playerEntity)
     {
-        if ((stack.getItem() instanceof HammerSuperTools && BlockTags.getCollection().getOrCreate(CAN_HAMMER).func_230235_a_(target.getBlock()))
-        || (stack.getItem() instanceof ShovelSuperTools && BlockTags.getCollection().getOrCreate(CAN_SHOVEL).func_230235_a_(target.getBlock())))
+        if ((stack.getItem() instanceof HammerSuperTools && BlockTags.getCollection().get(CAN_HAMMER).contains(target.getBlock()))
+        || (stack.getItem() instanceof ShovelSuperTools && BlockTags.getCollection().get(CAN_SHOVEL).contains(target.getBlock())))
         {
             return true;
         }
@@ -236,7 +234,7 @@ public class WorldEvents
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, theBlock, facing.getIndex());
                     if (world instanceof ServerWorld)
                     {
-                        SuperTools.getNetwork().sendToPosition(pEM, new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, world.func_234923_W_()));
+                        SuperTools.getNetwork().sendToPosition(pEM, new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, world.getDimensionKey()));
                     }
                 }
             }

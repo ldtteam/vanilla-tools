@@ -83,7 +83,7 @@ public class BlockParticleEffectMessage implements IMessage
         buf.writeInt(pos.getX());
         buf.writeInt(pos.getY());
         buf.writeInt(pos.getZ());
-        buf.writeInt(Block.BLOCK_STATE_IDS.get(block));
+        buf.writeInt(Block.BLOCK_STATE_IDS.getId(block));
         buf.writeInt(side);
     }
 }
