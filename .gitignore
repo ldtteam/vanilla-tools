@@ -7,7 +7,7 @@
 
 build/
 
-gradle/
+gradle\.properties
 
 *.class
 
