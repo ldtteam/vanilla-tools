@@ -1,0 +1,26 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "supertools:items/netherite_hammer"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-18.25, -88.5, 5],
+			"translation": [0, 3.25, 2.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [50.75, 454, 282],
+			"translation": [0, 3.25, 2.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [-8.5, -105.25, 43.5],
+			"translation": [0, 2.25, 0]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-51.75, 421, -0.5],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		}
+	}
+}
