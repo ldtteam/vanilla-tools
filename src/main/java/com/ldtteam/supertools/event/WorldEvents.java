@@ -42,7 +42,7 @@ public class WorldEvents
     /**
      * Tags.
      */
-    private static final ResourceLocation CAN_HAMMER = new ResourceLocation("supertools","can_hammer");
+    private static final ResourceLocation CAN_HAMMER = new ResourceLocation("supertools", "can_hammer");
     private static final ResourceLocation CAN_SHOVEL = new ResourceLocation("supertools", "can_shovel");
 
     /**
@@ -66,7 +66,7 @@ public class WorldEvents
                 for (BlockPos pos : getAffectedPos(event.getPlayer()))
                 {
                     final BlockState state = world.getBlockState(pos);
-                    if (hardness*2 >= state.getBlockHardness(world, pos) && isBestTool(state, world, pos, item, event.getPlayer()))
+                    if (hardness * 2 >= state.getBlockHardness(world, pos) && isBestTool(state, world, pos, item, event.getPlayer()))
                     {
                         state.getBlock().harvestBlock(world, event.getPlayer(), pos, state, world.getTileEntity(pos), mainHand);
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -146,7 +146,7 @@ public class WorldEvents
         float product = sinYaw * cosPitch;
         float product2 = cosYaw * cosPitch;
         double reachDistance = playerEntity.getAttribute(ForgeMod.REACH_DISTANCE.get()).getValue();
-        Vector3d vector3d1 = vector3d.add((double)product * reachDistance, (double)sinPitch * reachDistance, (double)product2 * reachDistance);
+        Vector3d vector3d1 = vector3d.add((double) product * reachDistance, (double) sinPitch * reachDistance, (double) product2 * reachDistance);
         return world.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.OUTLINE, mode, playerEntity));
     }
 

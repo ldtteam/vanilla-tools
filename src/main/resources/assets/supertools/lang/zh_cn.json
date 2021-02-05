@@ -1,0 +1,14 @@
+{
+    "item.supertools.hammerwood": "重木稿",
+    "item.supertools.hammerstone": "重石稿",
+    "item.supertools.hammeriron": "重铁稿",
+    "item.supertools.hammergold": "重金稿",
+    "item.supertools.hammerdiamond": "重钻石稿",
+
+    "item.supertools.shovelwood": "大木铲",
+    "item.supertools.shovelstone": "大石铲",
+    "item.supertools.shoveliron": "大铁铲",
+    "item.supertools.shovelgold": "大金铲",
+    "item.supertools.shoveldiamond": "大钻石铲",
+    "itemGroup.supertools": "Vanilla+ Tools"
+}
