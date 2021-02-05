@@ -26,7 +26,7 @@ public class NetworkChannel
      * Forge network channel
      */
 
-    private final        SimpleChannel rawChannel;
+    private final SimpleChannel rawChannel;
 
     /**
      * Creates a new instance of network channel.
