@@ -18,3 +18,5 @@ runClient/
 out/
 
 runServer/
+
+logs/
