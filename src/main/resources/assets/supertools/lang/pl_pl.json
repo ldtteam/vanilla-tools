@@ -1,0 +1,14 @@
+{
+    "item.supertools.hammerwood": "Drewniany młot",
+    "item.supertools.hammerstone": "Kamienny młot",
+    "item.supertools.hammeriron": "Żelazny młot",
+    "item.supertools.hammergold": "Złoty młot",
+    "item.supertools.hammerdiamond": "Diamentowy młot",
+
+    "item.supertools.shovelwood": "Drewniana łopata",
+    "item.supertools.shovelstone": "Kamienna łopata",
+    "item.supertools.shoveliron": "Żelazna łopata",
+    "item.supertools.shovelgold": "Złota łopata",
+    "item.supertools.shoveldiamond": "Diamentowa łopata",
+    "itemGroup.supertools": "Narzędzia Vanilla+"
+}
