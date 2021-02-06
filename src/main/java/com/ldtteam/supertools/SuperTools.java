@@ -39,6 +39,7 @@ public class SuperTools
 
     /**
      * Get the network handler.
+     *
      * @return the network handler.
      */
     public static NetworkChannel getNetwork()

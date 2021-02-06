@@ -42,7 +42,7 @@ public class ShovelSuperTools extends ShovelItem
             {
                 final PlayerEntity player = context.getPlayer();
                 final World world = context.getWorld();
-                if(super.onItemUse(context) == ActionResultType.CONSUME && player != null)
+                if (super.onItemUse(context) == ActionResultType.CONSUME && player != null)
                 {
                     if (player.canPlayerEdit(context.getPos(), context.getFace(), context.getItem()))
                     {
@@ -56,7 +56,8 @@ public class ShovelSuperTools extends ShovelItem
                                 world.setBlockState(pos, iblockstate1, 11);
                             }
                         }
-                        context.getItem().damageItem(1, player, (p) -> {
+                        context.getItem().damageItem(1, player, (p) ->
+                        {
                             p.sendBreakAnimation(context.getHand());
                         });
                         return ActionResultType.CONSUME;

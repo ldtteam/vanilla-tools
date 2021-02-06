@@ -58,7 +58,7 @@ public class WorldEvents
         {
             final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
             if (item.getItem() instanceof HammerSuperTools
-                  || item.getItem() instanceof ShovelSuperTools)
+                    || item.getItem() instanceof ShovelSuperTools)
             {
                 final ItemStack mainHand = event.getPlayer().getHeldItemMainhand();
                 final World world = event.getPlayer().getEntityWorld();
@@ -96,7 +96,7 @@ public class WorldEvents
     private static boolean isBestTool(final BlockState target, final IWorld world, final BlockPos pos, final ItemStack stack, final PlayerEntity playerEntity)
     {
         if ((stack.getItem() instanceof HammerSuperTools && BlockTags.getCollection().get(CAN_HAMMER).contains(target.getBlock()))
-        || (stack.getItem() instanceof ShovelSuperTools && BlockTags.getCollection().get(CAN_SHOVEL).contains(target.getBlock())))
+                || (stack.getItem() instanceof ShovelSuperTools && BlockTags.getCollection().get(CAN_SHOVEL).contains(target.getBlock())))
         {
             return true;
         }
@@ -113,8 +113,8 @@ public class WorldEvents
                     {
                         final ToolItem toolItem = (ToolItem) tool.getB().getItem();
                         if (tool.getB().getDestroySpeed(target) >= toolItem.getTier().getEfficiency()
-                              && stack.getToolTypes().contains(tool.getA())
-                              && (target.getHarvestLevel() == 0 || stack.getHarvestLevel(forgeTool, playerEntity, target) >= target.getHarvestLevel()))
+                                && stack.getToolTypes().contains(tool.getA())
+                                && (target.getHarvestLevel() == 0 || stack.getHarvestLevel(forgeTool, playerEntity, target) >= target.getHarvestLevel()))
                         {
                             return true;
                         }
@@ -219,7 +219,7 @@ public class WorldEvents
     {
         final ItemStack item = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
         if (event.getPos() != null && (item.getItem() instanceof HammerSuperTools
-              || item.getItem() instanceof ShovelSuperTools))
+                || item.getItem() instanceof ShovelSuperTools))
         {
             final PlayerEntity player = event.getPlayer();
             final World world = player.getEntityWorld();

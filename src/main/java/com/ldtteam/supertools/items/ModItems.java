@@ -60,6 +60,7 @@ public final class ModItems
 
     /**
      * Initiates all the blocks at the correct time.
+     *
      * @param registry the registry!
      */
     public static void init(final IForgeRegistry<Item> registry)

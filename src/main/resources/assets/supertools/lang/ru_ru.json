@@ -1,14 +1,15 @@
 {
-    "item.supertools.hammerwood": "Деревяной молоток",
-    "item.supertools.hammerstone": "Каменый молоток",
-    "item.supertools.hammeriron": "Железный молоток",
-    "item.supertools.hammergold": "Золотой молоток",
-    "item.supertools.hammerdiamond": "Алмазный молоток",
+  "itemGroup.supertools": "Ваниль+Инструменты",
 
-    "item.supertools.shovelwood": "Древяная лопата",
-    "item.supertools.shovelstone": "Каменая лопата",
-    "item.supertools.shoveliron": "Железная лопата",
-    "item.supertools.shovelgold": "Золотая лопата",
-    "item.supertools.shoveldiamond": "Алмазная лопата",
-    "itemGroup.supertools": "Ваниль+Инструменты"
+  "item.supertools.hammerwood": "Деревяной молоток",
+  "item.supertools.hammerstone": "Каменый молоток",
+  "item.supertools.hammeriron": "Железный молоток",
+  "item.supertools.hammergold": "Золотой молоток",
+  "item.supertools.hammerdiamond": "Алмазный молоток",
+
+  "item.supertools.shovelwood": "Древяная лопата",
+  "item.supertools.shovelstone": "Каменая лопата",
+  "item.supertools.shoveliron": "Железная лопата",
+  "item.supertools.shovelgold": "Золотая лопата",
+  "item.supertools.shoveldiamond": "Алмазная лопата"
 }

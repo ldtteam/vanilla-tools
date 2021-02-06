@@ -20,8 +20,8 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
  */
 public class NetworkChannel
 {
-    private static final String        LATEST_PROTO_VER = "1.0";
-    private static final String        ACCEPTED_PROTO_VERS = LATEST_PROTO_VER;
+    private static final String LATEST_PROTO_VER = "1.0";
+    private static final String ACCEPTED_PROTO_VERS = LATEST_PROTO_VER;
     /**
      * Forge network channel
      */
@@ -57,7 +57,8 @@ public class NetworkChannel
      */
     private <MSG extends IMessage> void registerMessage(final int id, final Class<MSG> msgClazz)
     {
-        rawChannel.registerMessage(id, msgClazz, (msg, buf) -> msg.toBytes(buf), (buf) -> {
+        rawChannel.registerMessage(id, msgClazz, (msg, buf) -> msg.toBytes(buf), (buf) ->
+        {
             try
             {
                 final MSG msg = msgClazz.newInstance();
