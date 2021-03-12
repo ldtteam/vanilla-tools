@@ -60,7 +60,7 @@ public class BlockParticleEffectMessage implements IMessage
         final int y = buf.readInt();
         final int z = buf.readInt();
         pos = new BlockPos(x, y, z);
-        block = Block.getStateById(buf.readInt());
+        block = Block.stateById(buf.readInt());
         side = buf.readInt();
     }
 
@@ -74,7 +74,7 @@ public class BlockParticleEffectMessage implements IMessage
     @Override
     public void onExecute(final NetworkEvent.Context ctxIn, final boolean isLogicalServer)
     {
-        Minecraft.getInstance().particles.addBlockHitEffects(pos, Direction.byIndex(side));
+        Minecraft.getInstance().particleEngine.crack(pos, Direction.from3DDataValue(side));
     }
 
     @Override
@@ -83,7 +83,7 @@ public class BlockParticleEffectMessage implements IMessage
         buf.writeInt(pos.getX());
         buf.writeInt(pos.getY());
         buf.writeInt(pos.getZ());
-        buf.writeInt(Block.BLOCK_STATE_IDS.getId(block));
+        buf.writeInt(Block.BLOCK_STATE_REGISTRY.getId(block));
         buf.writeInt(side);
     }
 }
