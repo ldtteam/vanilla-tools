@@ -32,7 +32,7 @@ configFile.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
 
-version = '1.16.5-' + (System.getenv().containsKey("Version") ? System.getenv("Version") : '4.1')
+version = '1.16.5-' + (System.getenv().containsKey("Version") ? System.getenv("Version") : '4.2')
 group = 'com.ldtteam' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'supertools'
 
