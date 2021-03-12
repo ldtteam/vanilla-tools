@@ -21,7 +21,7 @@ public class HammerSuperTools extends PickaxeItem
      */
     public HammerSuperTools(final IItemTier tier, final int attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().group(ModCreativeTabs.SUPER_TOOLS).addToolType(ToolType.PICKAXE, tier.getHarvestLevel()));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.SUPER_TOOLS).addToolType(ToolType.PICKAXE, tier.getLevel()));
         this.setRegistryName("hammer" + tier.toString().toLowerCase(Locale.ENGLISH));
     }
 }
