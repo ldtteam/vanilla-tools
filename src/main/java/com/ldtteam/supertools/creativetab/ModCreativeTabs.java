@@ -21,7 +21,7 @@ public final class ModCreativeTabs
         @Override
         public boolean hasSearchBar()
         {
-            return true;
+            return false;
         }
     };
 
