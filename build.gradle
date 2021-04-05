@@ -25,7 +25,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-version = '1.16.5-' + (System.getenv().containsKey("Version") ? System.getenv("Version") : '4.3')
+version = '1.16.5-' + (System.getenv().containsKey("Version") ? System.getenv("Version") : '4.4')
 group = 'com.ldtteam' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'supertools'
 
@@ -37,7 +37,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. They may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'snapshot', version: '20210309-1.16.5'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. Uncomment this to disable.
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')

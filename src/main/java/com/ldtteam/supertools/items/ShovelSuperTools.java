@@ -27,38 +27,38 @@ public class ShovelSuperTools extends ShovelItem
      */
     public ShovelSuperTools(final IItemTier tier, final float attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.SUPER_TOOLS).addToolType(ToolType.SHOVEL, tier.getLevel()));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().group(ModCreativeTabs.SUPER_TOOLS).addToolType(ToolType.SHOVEL, tier.getHarvestLevel()));
         this.setRegistryName("shovel" + tier.toString().toLowerCase(Locale.ENGLISH));
     }
 
     @NotNull
     @Override
-    public ActionResultType useOn(final ItemUseContext context)
+    public ActionResultType onItemUse(final ItemUseContext context)
     {
-        if (!context.getLevel().isClientSide)
+        if (!context.getWorld().isRemote)
         {
-            final ItemStack item = context.getItemInHand();
+            final ItemStack item = context.getItem();
             if (item.getItem() instanceof ShovelSuperTools)
             {
                 final PlayerEntity player = context.getPlayer();
-                final World world = context.getLevel();
-                if (super.useOn(context) == ActionResultType.CONSUME && player != null)
+                final World world = context.getWorld();
+                if (super.onItemUse(context) == ActionResultType.CONSUME && player != null)
                 {
-                    if (player.mayUseItemAt(context.getClickedPos(), context.getClickedFace(), context.getItemInHand()))
+                    if (player.canPlayerEdit(context.getPos(), context.getFace(), context.getItem()))
                     {
                         for (final BlockPos pos : WorldEvents.getAffectedPos(player))
                         {
-                            BlockState blockstate = FLATTENABLES.get(world.getBlockState(pos).getBlock());
-                            if (world.getBlockState(pos.above()).isAir(world, pos.above()) && blockstate != null)
+                            BlockState blockstate = SHOVEL_LOOKUP.get(world.getBlockState(pos).getBlock());
+                            if (world.getBlockState(pos.up()).isAir(world, pos.up()) && blockstate != null)
                             {
-                                BlockState iblockstate1 = Blocks.GRASS_PATH.defaultBlockState();
-                                world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                                world.setBlock(pos, iblockstate1, 11);
+                                BlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
+                                world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                                world.setBlockState(pos, iblockstate1, 11);
                             }
                         }
-                        context.getItemInHand().hurtAndBreak(1, player, (p) ->
+                        context.getItem().damageItem(1, player, (p) ->
                         {
-                            p.broadcastBreakEvent(context.getHand());
+                            p.sendBreakAnimation(context.getHand());
                         });
                         return ActionResultType.CONSUME;
                     }

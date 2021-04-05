@@ -13,7 +13,7 @@ public final class ModCreativeTabs
     public static final ItemGroup SUPER_TOOLS = new ItemGroup(Constants.MOD_ID)
     {
         @Override
-        public ItemStack makeIcon()
+        public ItemStack createIcon()
         {
             return new ItemStack(ModItems.diaHammer);
         }
