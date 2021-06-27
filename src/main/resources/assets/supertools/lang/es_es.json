@@ -1,0 +1,17 @@
+{
+  "itemGroup.supertools": "Vanilla+ Herramientas",
+
+  "item.supertools.hammerwood": "Martillo de Madera",
+  "item.supertools.hammerstone": "Martillo de Piedra",
+  "item.supertools.hammeriron": "Martillo de Hierro",
+  "item.supertools.hammergold": "Martillo de Oro",
+  "item.supertools.hammerdiamond": "Martillo de Diamante",
+  "item.supertools.hammernetherite": "Martillo de Netherita",
+
+  "item.supertools.shovelwood": "Pala de Madera",
+  "item.supertools.shovelstone": "Pala de Piedra",
+  "item.supertools.shoveliron": "Pala de Hierro",
+  "item.supertools.shovelgold": "Pala de Oro",
+  "item.supertools.shoveldiamond": "Pala de Diamante",
+  "item.supertools.shovelnetherite": "Pala de Netherita"
+}

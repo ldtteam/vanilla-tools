@@ -57,9 +57,7 @@ public class ShovelSuperTools extends ShovelItem
                             }
                         }
                         context.getItem().damageItem(1, player, (p) ->
-                        {
-                            p.sendBreakAnimation(context.getHand());
-                        });
+                                p.sendBreakAnimation(context.getHand()));
                         return ActionResultType.CONSUME;
                     }
                 }

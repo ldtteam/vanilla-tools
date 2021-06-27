@@ -1,7 +1,8 @@
 package com.ldtteam.supertools.items;
 
-import com.ldtteam.supertools.api.util.constant.Constants;
-import net.minecraft.item.*;
+import com.ldtteam.supertools.SuperTools;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,8 +15,8 @@ import net.minecraftforge.registries.ObjectHolder;
  * We disabled the following finals since we are neither able to mark the items as final, nor do we want to provide public accessors.
  */
 @SuppressWarnings({"squid:ClassVariableVisibilityCheck", "squid:S2444", "squid:S1444"})
-@ObjectHolder(Constants.MOD_ID)
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@ObjectHolder(SuperTools.MOD_ID)
+@Mod.EventBusSubscriber(modid = SuperTools.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModItems
 {
     public static Item woodenHammer;

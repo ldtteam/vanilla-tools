@@ -36,7 +36,7 @@ public class NetworkChannel
      */
     public NetworkChannel(final String channelName)
     {
-        rawChannel = NetworkRegistry.newSimpleChannel(new ResourceLocation(Constants.MOD_ID, channelName), () -> LATEST_PROTO_VER, ACCEPTED_PROTO_VERS::equals, ACCEPTED_PROTO_VERS::equals);
+        rawChannel = NetworkRegistry.newSimpleChannel(new ResourceLocation(SuperTools.MOD_ID, channelName), () -> LATEST_PROTO_VER, ACCEPTED_PROTO_VERS::equals, ACCEPTED_PROTO_VERS::equals);
     }
 
     /**

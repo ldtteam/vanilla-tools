@@ -1,6 +1,6 @@
 package com.ldtteam.supertools.creativetab;
 
-import com.ldtteam.supertools.api.util.constant.Constants;
+import com.ldtteam.supertools.SuperTools;
 import com.ldtteam.supertools.items.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
  */
 public final class ModCreativeTabs
 {
-    public static final ItemGroup SUPER_TOOLS = new ItemGroup(Constants.MOD_ID)
+    public static final ItemGroup SUPER_TOOLS = new ItemGroup(SuperTools.MOD_ID)
     {
         @Override
         public ItemStack createIcon()
