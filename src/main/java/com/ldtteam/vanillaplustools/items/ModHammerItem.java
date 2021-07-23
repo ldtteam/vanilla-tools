@@ -12,9 +12,10 @@ public class ModHammerItem extends PickaxeItem
 {
     /**
      * Setups the tool.
-     * @param tier the tier of it.
+     *
+     * @param tier           the tier of it.
      * @param attackDamageIn the incoming attack damage.
-     * @param attackSpeedIn the attack speed.
+     * @param attackSpeedIn  the attack speed.
      */
     public ModHammerItem(final Tier tier, final int attackDamageIn, float attackSpeedIn)
     {

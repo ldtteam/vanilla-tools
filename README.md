@@ -1,2 +1,3 @@
-# vanilla-tools
-3x3 Mining and Digging tools in Vanilla flavor
+# About Vanilla+ Tools
+
+Vanilla+ Tools is a vanilla flavored tool mod. It adds hammers and shovels that break blocks in a 3x3 area.

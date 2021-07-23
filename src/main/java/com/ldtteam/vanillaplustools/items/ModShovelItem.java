@@ -21,9 +21,10 @@ public class ModShovelItem extends ShovelItem
 {
     /**
      * Setups the tool.
-     * @param tier the tier of it.
+     *
+     * @param tier           the tier of it.
      * @param attackDamageIn the incoming attack damage.
-     * @param attackSpeedIn the attack speed.
+     * @param attackSpeedIn  the attack speed.
      */
     public ModShovelItem(final Tier tier, final float attackDamageIn, float attackSpeedIn)
     {

@@ -1,10 +1,12 @@
 package com.ldtteam.vanillaplustools.items;
 
 import com.ldtteam.vanillaplustools.VanillaPlusTools;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = VanillaPlusTools.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModItems

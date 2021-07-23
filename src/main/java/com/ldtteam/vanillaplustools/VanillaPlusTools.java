@@ -2,7 +2,9 @@ package com.ldtteam.vanillaplustools;
 
 import com.ldtteam.vanillaplustools.coremod.network.NetworkChannel;
 import com.ldtteam.vanillaplustools.event.ModEvents;
+import com.ldtteam.vanillaplustools.items.ModItems;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,5 +21,6 @@ public class VanillaPlusTools
     public VanillaPlusTools()
     {
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(ModEvents.class);
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

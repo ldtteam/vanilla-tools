@@ -32,6 +32,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fmllegacy.network.PacketDistributor.TargetPoint;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,7 +53,7 @@ public class ModEvents
     public static List<Tuple<ToolType, ItemStack>> tools;
 
     @SubscribeEvent
-    public static void onModInit()
+    public static void onModInit(final FMLCommonSetupEvent event)
     {
         VanillaPlusTools.NETWORK_CHANNEL.registerCommonMessages();
     }
