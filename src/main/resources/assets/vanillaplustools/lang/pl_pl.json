@@ -1,0 +1,15 @@
+{
+  "itemGroup.vanillaplustools": "Narzędzia Vanilla+",
+
+  "item.vanillaplustools.wooden_hammer": "Drewniany młot",
+  "item.vanillaplustools.stone_hammer": "Kamienny młot",
+  "item.vanillaplustools.iron_hammer": "Żelazny młot",
+  "item.vanillaplustools.gold_hammer": "Złoty młot",
+  "item.vanillaplustools.diamond_hammer": "Diamentowy młot",
+
+  "item.vanillaplustools.wooden_shovel": "Drewniana łopata",
+  "item.vanillaplustools.stone_shovel": "Kamienna łopata",
+  "item.vanillaplustools.iron_shovel": "Żelazna łopata",
+  "item.vanillaplustools.gold_shovel": "Złota łopata",
+  "item.vanillaplustools.diamond_shovel": "Diamentowa łopata"
+}

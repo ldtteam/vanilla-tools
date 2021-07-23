@@ -1,0 +1,17 @@
+{
+  "itemGroup.vanillaplustools": "Vanilla+ Herramientas",
+
+  "item.vanillaplustools.wooden_hammer": "Martillo de Madera",
+  "item.vanillaplustools.stone_hammer": "Martillo de Piedra",
+  "item.vanillaplustools.iron_hammer": "Martillo de Hierro",
+  "item.vanillaplustools.gold_hammer": "Martillo de Oro",
+  "item.vanillaplustools.diamond_hammer": "Martillo de Diamante",
+  "item.vanillaplustools.netherite_hammer": "Martillo de Netherita",
+
+  "item.vanillaplustools.wooden_shovel": "Pala de Madera",
+  "item.vanillaplustools.stone_shovel": "Pala de Piedra",
+  "item.vanillaplustools.iron_shovel": "Pala de Hierro",
+  "item.vanillaplustools.gold_shovel": "Pala de Oro",
+  "item.vanillaplustools.diamond_shovel": "Pala de Diamante",
+  "item.vanillaplustools.netherite_shovel": "Pala de Netherita"
+}

@@ -1,0 +1,15 @@
+{
+  "itemGroup.vanillaplustools": "Ваниль+Инструменты",
+
+  "item.vanillaplustools.wooden_hammer": "Деревяной молоток",
+  "item.vanillaplustools.stone_hammer": "Каменый молоток",
+  "item.vanillaplustools.iron_hammer": "Железный молоток",
+  "item.vanillaplustools.gold_hammer": "Золотой молоток",
+  "item.vanillaplustools.diamond_hammer": "Алмазный молоток",
+
+  "item.vanillaplustools.wooden_shovel": "Древяная лопата",
+  "item.vanillaplustools.stone_shovel": "Каменая лопата",
+  "item.vanillaplustools.iron_shovel": "Железная лопата",
+  "item.vanillaplustools.gold_shovel": "Золотая лопата",
+  "item.vanillaplustools.diamond_shovel": "Алмазная лопата"
+}

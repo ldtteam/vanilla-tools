@@ -1,0 +1,15 @@
+{
+  "itemGroup.vanillaplustools": "Vanilla+ Tools",
+
+  "item.vanillaplustools.wooden_hammer": "重木稿",
+  "item.vanillaplustools.stone_hammer": "重石稿",
+  "item.vanillaplustools.iron_hammer": "重铁稿",
+  "item.vanillaplustools.gold_hammer": "重金稿",
+  "item.vanillaplustools.diamond_hammer": "重钻石稿",
+
+  "item.vanillaplustools.wooden_shovel": "大木铲",
+  "item.vanillaplustools.stone_shovel": "大石铲",
+  "item.vanillaplustools.iron_shovel": "大铁铲",
+  "item.vanillaplustools.gold_shovel": "大金铲",
+  "item.vanillaplustools.diamond_shovel": "大钻石铲"
+}
