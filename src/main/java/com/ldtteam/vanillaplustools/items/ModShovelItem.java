@@ -15,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
 public class ModShovelItem extends ShovelItem
 {
     /**
@@ -29,7 +27,6 @@ public class ModShovelItem extends ShovelItem
     public ModShovelItem(final Tier tier, final float attackDamageIn, float attackSpeedIn)
     {
         super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS).addToolType(ToolType.SHOVEL, tier.getLevel()));
-        this.setRegistryName("shovel" + tier.toString().toLowerCase(Locale.ENGLISH));
     }
 
     @NotNull

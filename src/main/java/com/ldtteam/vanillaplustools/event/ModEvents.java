@@ -60,7 +60,6 @@ public class ModEvents
 
     /**
      * Event when a block is broken.
-     * Event gets cancelled when there no permission to break a hut.
      *
      * @param event {@link net.minecraftforge.event.world.BlockEvent.BreakEvent}
      */
