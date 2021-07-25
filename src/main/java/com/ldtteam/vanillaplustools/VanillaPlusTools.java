@@ -1,6 +1,6 @@
 package com.ldtteam.vanillaplustools;
 
-import com.ldtteam.vanillaplustools.coremod.network.NetworkChannel;
+import com.ldtteam.vanillaplustools.event.LifeCycleEvents;
 import com.ldtteam.vanillaplustools.event.ModEvents;
 import com.ldtteam.vanillaplustools.items.ModItems;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +13,6 @@ public class VanillaPlusTools
 {
     public static final String MOD_ID = "vanillaplustools";
     public static final Logger LOGGER = LogManager.getLogger(VanillaPlusTools.MOD_ID);
-    public static final NetworkChannel NETWORK_CHANNEL = new NetworkChannel("net-channel");
 
     /**
      * Constructor to initiate this.
@@ -21,6 +20,8 @@ public class VanillaPlusTools
     public VanillaPlusTools()
     {
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(ModEvents.class);
+        Mod.EventBusSubscriber.Bus.MOD.bus().get().register(LifeCycleEvents.class);
+
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

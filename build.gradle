@@ -118,6 +118,8 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
+    implementation('cpw.mods:securejarhandler') { version { strictly '0.9.45' } }
+
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
     compileOnly 'com.intellij:annotations:+@jar'
 
@@ -127,7 +129,7 @@ dependencies {
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
     // Examples using mod jars from ./libs
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+    // implementation fg.deobf("blank:coolmod-${mc_vergsion}:${coolmod_version}")
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

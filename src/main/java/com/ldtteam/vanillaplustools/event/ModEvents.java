@@ -1,13 +1,12 @@
 package com.ldtteam.vanillaplustools.event;
 
-import com.ldtteam.vanillaplustools.VanillaPlusTools;
 import com.ldtteam.vanillaplustools.coremod.network.BlockParticleEffectMessage;
+import com.ldtteam.vanillaplustools.coremod.network.Network;
 import com.ldtteam.vanillaplustools.items.ModHammerItem;
 import com.ldtteam.vanillaplustools.items.ModShovelItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Tuple;
@@ -32,7 +31,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fmllegacy.network.PacketDistributor.TargetPoint;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,13 +48,8 @@ public class ModEvents
     /**
      * List of tools to test blocks against, used for finding right tool.
      */
-    public static List<Tuple<ToolType, ItemStack>> tools;
-
-    @SubscribeEvent
-    public static void onModInit(final FMLCommonSetupEvent event)
-    {
-        VanillaPlusTools.NETWORK_CHANNEL.registerCommonMessages();
-    }
+    public static List<Tuple<ToolType, ItemStack>> clientTools;
+    public static List<Tuple<ToolType, ItemStack>> serverTools;
 
     /**
      * Event when a block is broken.
@@ -92,16 +85,30 @@ public class ModEvents
      *
      * @return the list of possible tools.
      */
-    public static List<Tuple<ToolType, ItemStack>> getOrInitTestTools()
+    public static List<Tuple<ToolType, ItemStack>> getOrInitTestTools(final boolean isClient)
     {
-        if (tools == null)
+        if (isClient)
         {
-            tools = new ArrayList<>();
-            tools.add(new Tuple<>(ToolType.SHOVEL, new ItemStack(Items.WOODEN_SHOVEL)));
-            tools.add(new Tuple<>(ToolType.AXE, new ItemStack(Items.WOODEN_AXE)));
-            tools.add(new Tuple<>(ToolType.PICKAXE, new ItemStack(Items.WOODEN_PICKAXE)));
+            if (clientTools == null)
+            {
+                clientTools = new ArrayList<>();
+                clientTools.add(new Tuple<>(ToolType.SHOVEL, new ItemStack(Items.WOODEN_SHOVEL)));
+                clientTools.add(new Tuple<>(ToolType.AXE, new ItemStack(Items.WOODEN_AXE)));
+                clientTools.add(new Tuple<>(ToolType.PICKAXE, new ItemStack(Items.WOODEN_PICKAXE)));
+            }
+            return clientTools;
         }
-        return tools;
+        else
+        {
+            if (serverTools == null)
+            {
+                serverTools = new ArrayList<>();
+                serverTools.add(new Tuple<>(ToolType.SHOVEL, new ItemStack(Items.WOODEN_SHOVEL)));
+                serverTools.add(new Tuple<>(ToolType.AXE, new ItemStack(Items.WOODEN_AXE)));
+                serverTools.add(new Tuple<>(ToolType.PICKAXE, new ItemStack(Items.WOODEN_PICKAXE)));
+            }
+            return serverTools;
+        }
     }
 
     private static boolean isBestTool(final BlockState target, final LevelAccessor level, final BlockPos pos, final ItemStack stack, final Player player)
@@ -118,7 +125,7 @@ public class ModEvents
         {
             if (target.getDestroySpeed(level, pos) > 0f)
             {
-                for (final Tuple<ToolType, ItemStack> tool : getOrInitTestTools())
+                for (final Tuple<ToolType, ItemStack> tool : getOrInitTestTools(level.isClientSide()))
                 {
                     if (tool.getB() != null && tool.getB().getItem() instanceof DiggerItem)
                     {
@@ -241,10 +248,10 @@ public class ModEvents
                 final BlockState theBlock = level.getBlockState(pos);
                 if (isBestTool(theBlock, level, pos, item, event.getPlayer()))
                 {
-                    final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, theBlock, facing.get3DDataValue());
-                    if (level instanceof ServerLevel)
+                    final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, facing.get3DDataValue());
+                    if (!level.isClientSide())
                     {
-                        VanillaPlusTools.NETWORK_CHANNEL.sendToPosition(pEM, new TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
+                        Network.getNetwork().sendToPosition(pEM, new TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
                     }
                 }
             }
