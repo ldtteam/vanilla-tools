@@ -2,9 +2,12 @@ package com.ldtteam.vanillaplustools.items;
 
 import com.ldtteam.vanillaplustools.creativetab.ModCreativeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
+import org.jetbrains.annotations.NotNull;
 
 public class ModHammerItem extends PickaxeItem
 {
@@ -17,6 +20,12 @@ public class ModHammerItem extends PickaxeItem
      */
     public ModHammerItem(final Tier tier, final int attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS).addToolType(ToolType.PICKAXE, tier.getLevel()));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS));
+    }
+
+    @Override
+    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ToolAction toolAction)
+    {
+        return toolAction == ToolActions.PICKAXE_DIG;
     }
 }

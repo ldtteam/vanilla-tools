@@ -26,7 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,11 +44,6 @@ public class ModEvents
      */
     private static final ResourceLocation CAN_HAMMER = new ResourceLocation("vanillaplustools", "can_hammer");
     private static final ResourceLocation CAN_SHOVEL = new ResourceLocation("vanillaplustools", "can_shovel");
-    /**
-     * List of tools to test blocks against, used for finding right tool.
-     */
-    public static List<Tuple<ToolType, ItemStack>> clientTools;
-    public static List<Tuple<ToolType, ItemStack>> serverTools;
 
     /**
      * Event when a block is broken.
@@ -80,37 +74,6 @@ public class ModEvents
         }
     }
 
-    /**
-     * Gets or initializes the test tool list.
-     *
-     * @return the list of possible tools.
-     */
-    public static List<Tuple<ToolType, ItemStack>> getOrInitTestTools(final boolean isClient)
-    {
-        if (isClient)
-        {
-            if (clientTools == null)
-            {
-                clientTools = new ArrayList<>();
-                clientTools.add(new Tuple<>(ToolType.SHOVEL, new ItemStack(Items.WOODEN_SHOVEL)));
-                clientTools.add(new Tuple<>(ToolType.AXE, new ItemStack(Items.WOODEN_AXE)));
-                clientTools.add(new Tuple<>(ToolType.PICKAXE, new ItemStack(Items.WOODEN_PICKAXE)));
-            }
-            return clientTools;
-        }
-        else
-        {
-            if (serverTools == null)
-            {
-                serverTools = new ArrayList<>();
-                serverTools.add(new Tuple<>(ToolType.SHOVEL, new ItemStack(Items.WOODEN_SHOVEL)));
-                serverTools.add(new Tuple<>(ToolType.AXE, new ItemStack(Items.WOODEN_AXE)));
-                serverTools.add(new Tuple<>(ToolType.PICKAXE, new ItemStack(Items.WOODEN_PICKAXE)));
-            }
-            return serverTools;
-        }
-    }
-
     private static boolean isBestTool(final BlockState target, final LevelAccessor level, final BlockPos pos, final ItemStack stack, final Player player)
     {
         if ((stack.getItem() instanceof ModHammerItem && BlockTags.getAllTags().getTag(CAN_HAMMER).contains(target.getBlock()))
@@ -119,37 +82,7 @@ public class ModEvents
             return true;
         }
 
-        final ToolType forgeTool = target.getHarvestTool();
-
-        if (forgeTool == null)
-        {
-            if (target.getDestroySpeed(level, pos) > 0f)
-            {
-                for (final Tuple<ToolType, ItemStack> tool : getOrInitTestTools(level.isClientSide()))
-                {
-                    if (tool.getB() != null && tool.getB().getItem() instanceof DiggerItem)
-                    {
-                        final DiggerItem toolItem = (DiggerItem) tool.getB().getItem();
-                        if (tool.getB().getDestroySpeed(target) >= toolItem.getTier().getSpeed()
-                            && stack.getToolTypes().contains(tool.getA())
-                            && (target.getHarvestLevel() == 0 || stack.getHarvestLevel(forgeTool, player, target) >= target.getHarvestLevel()))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        else if (stack.getToolTypes().contains(forgeTool) && stack.getHarvestLevel(forgeTool, player, target) >= target.getHarvestLevel())
-        {
-            return true;
-        }
-
-        if (target.getMaterial() == Material.WOOD)
-        {
-            return false;
-        }
-        return target.getBlock() instanceof GlazedTerracottaBlock && stack.getItem() instanceof ModHammerItem;
+        return stack.isCorrectToolForDrops(target);
     }
 
     public static BlockHitResult rayTrace(final Level level, final Player player, final ClipContext.Fluid mode)

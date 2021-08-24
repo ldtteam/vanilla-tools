@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.17.1-1.0'
+version = '1.17.1-1.2'
 group = 'com.ldtteam' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'vanillaplustools'
 
@@ -120,7 +120,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     implementation('cpw.mods:securejarhandler') { version { strictly '0.9.45' } }
 
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.44'
     compileOnly 'com.intellij:annotations:+@jar'
 
     // Real mod deobf dependency examples - these get remapped to your current mappings

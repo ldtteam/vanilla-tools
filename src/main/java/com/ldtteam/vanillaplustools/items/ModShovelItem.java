@@ -12,7 +12,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
 
 public class ModShovelItem extends ShovelItem
@@ -26,7 +27,13 @@ public class ModShovelItem extends ShovelItem
      */
     public ModShovelItem(final Tier tier, final float attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS).addToolType(ToolType.SHOVEL, tier.getLevel()));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS));
+    }
+
+    @Override
+    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ToolAction toolAction)
+    {
+        return ToolActions.DEFAULT_SHOVEL_ACTIONS.contains(toolAction);
     }
 
     @NotNull
