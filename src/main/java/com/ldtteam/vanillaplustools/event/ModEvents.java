@@ -9,19 +9,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +25,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.network.PacketDistributor.TargetPoint;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -184,7 +179,7 @@ public class ModEvents
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, facing.get3DDataValue());
                     if (!level.isClientSide())
                     {
-                        Network.getNetwork().sendToPosition(pEM, new TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
+                        Network.getNetwork().sendToPosition(pEM, new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
                     }
                 }
             }

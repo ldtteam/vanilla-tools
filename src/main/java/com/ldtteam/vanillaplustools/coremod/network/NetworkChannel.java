@@ -3,18 +3,19 @@ package com.ldtteam.vanillaplustools.coremod.network;
 import com.ldtteam.vanillaplustools.VanillaPlusTools;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
-import net.minecraftforge.fmllegacy.network.NetworkRegistry;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
-import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 /**
  * Our wrapper for Forge network layer
  */
 public class NetworkChannel
 {
-    private static final String LATEST_PROTO_VER = "1.0";
-    private static final String ACCEPTED_PROTO_VERS = LATEST_PROTO_VER;
+    private static final String        LATEST_PROTO_VER = "1.0";
+    private static final String        ACCEPTED_PROTO_VERS = LATEST_PROTO_VER;
+
     /**
      * Forge network channel
      */

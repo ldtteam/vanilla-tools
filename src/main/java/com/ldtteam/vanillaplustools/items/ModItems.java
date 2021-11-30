@@ -4,9 +4,9 @@ import com.ldtteam.vanillaplustools.VanillaPlusTools;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = VanillaPlusTools.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModItems
@@ -14,9 +14,9 @@ public final class ModItems
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, VanillaPlusTools.MOD_ID);
 
     public static final RegistryObject<ModHammerItem> WOODEN_HAMMER = ITEMS.register("wooden_hammer", () -> new ModHammerItem(Tiers.WOOD, 1, -2.8F));
-    public static final RegistryObject<ModHammerItem> STONE_HAMMER = ITEMS.register("stone_hammer", () -> new ModHammerItem(Tiers.STONE, 1, -2.8F));
-    public static final RegistryObject<ModHammerItem> IRON_HAMMER = ITEMS.register("iron_hammer", () -> new ModHammerItem(Tiers.IRON, 1, -2.8F));
-    public static final RegistryObject<ModHammerItem> GOLD_HAMMER = ITEMS.register("gold_hammer", () -> new ModHammerItem(Tiers.GOLD, 1, -2.8F));
+    public static final RegistryObject<ModHammerItem> STONE_HAMMER  = ITEMS.register("stone_hammer", () -> new ModHammerItem(Tiers.STONE, 1, -2.8F));
+    public static final RegistryObject<ModHammerItem> IRON_HAMMER    = ITEMS.register("iron_hammer", () -> new ModHammerItem(Tiers.IRON, 1, -2.8F));
+    public static final RegistryObject<ModHammerItem> GOLD_HAMMER    = ITEMS.register("gold_hammer", () -> new ModHammerItem(Tiers.GOLD, 1, -2.8F));
     public static final RegistryObject<ModHammerItem> DIAMOND_HAMMER = ITEMS.register("diamond_hammer", () -> new ModHammerItem(Tiers.DIAMOND, 1, -2.8F));
     public static final RegistryObject<ModHammerItem> NETHERITE_HAMMER = ITEMS.register("netherite_hammer", () -> new ModHammerItem(Tiers.NETHERITE, 1, -2.8F));
 
