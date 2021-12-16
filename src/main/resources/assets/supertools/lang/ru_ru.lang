@@ -1,0 +1,12 @@
+item.supertools.hammerWOOD.name=Деревянный молот
+item.supertools.hammerSTONE.name=Каменный молот
+item.supertools.hammerIRON.name=Железный молот
+item.supertools.hammerGOLD.name=Золотой молот
+item.supertools.hammerDIAMOND.name=Алмазный молот
+
+item.supertools.shovelWOOD.name=Деревянная лопата
+item.supertools.shovelSTONE.name=Каменная лопата
+item.supertools.shovelIRON.name=Железная лопата
+item.supertools.shovelGOLD.name=Золотая лопата
+item.supertools.shovelDIAMOND.name=Алмазная лопата
+itemGroup.supertools=Vanilla+ Tools
