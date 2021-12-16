@@ -1,15 +1,17 @@
 {
-  "itemGroup.vanillaplustools": "Ваниль+Инструменты",
+  "itemGroup.vanillaplustools": "Vanilla+ Tools",
 
-  "item.vanillaplustools.wooden_hammer": "Деревяной молоток",
-  "item.vanillaplustools.stone_hammer": "Каменый молоток",
-  "item.vanillaplustools.iron_hammer": "Железный молоток",
-  "item.vanillaplustools.gold_hammer": "Золотой молоток",
-  "item.vanillaplustools.diamond_hammer": "Алмазный молоток",
+  "item.vanillaplustools.wooden_hammer": "Деревянная молот",
+  "item.vanillaplustools.stone_hammer": "Каменный молот",
+  "item.vanillaplustools.iron_hammer": "Железный молот",
+  "item.vanillaplustools.gold_hammer": "Золотой молот",
+  "item.vanillaplustools.diamond_hammer": "Алмазный молот",
+  "item.vanillaplustools.netherite_hammer": "Незеритовый молот",
 
-  "item.vanillaplustools.wooden_shovel": "Древяная лопата",
-  "item.vanillaplustools.stone_shovel": "Каменая лопата",
+  "item.vanillaplustools.wooden_shovel": "Деревянная лопата",
+  "item.vanillaplustools.stone_shovel": "Каменная лопата",
   "item.vanillaplustools.iron_shovel": "Железная лопата",
   "item.vanillaplustools.gold_shovel": "Золотая лопата",
-  "item.vanillaplustools.diamond_shovel": "Алмазная лопата"
+  "item.vanillaplustools.diamond_shovel": "Алмазная лопата",
+  "item.vanillaplustools.netherite_shovel": "Незеритовая лопата"
 }
