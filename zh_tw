@@ -1,0 +1,17 @@
+{
+  "itemGroup.vanillaplustools": "Vanilla+ Tools",
+
+  "item.vanillaplustools.wooden_hammer": "木錘",
+  "item.vanillaplustools.stone_hammer": "石錘",
+  "item.vanillaplustools.iron_hammer": "鐵錘",
+  "item.vanillaplustools.gold_hammer": "金錘",
+  "item.vanillaplustools.diamond_hammer": "鑽石錘",
+  "item.vanillaplustools.netherite_hammer": "獄髓錘",
+
+  "item.vanillaplustools.wooden_shovel": "木鍬",
+  "item.vanillaplustools.stone_shovel": "石鍬",
+  "item.vanillaplustools.iron_shovel": "鐵鍬",
+  "item.vanillaplustools.gold_shovel": "金鍬",
+  "item.vanillaplustools.diamond_shovel": "鑽石鍬",
+  "item.vanillaplustools.netherite_shovel": "獄髓鍬"
+}
