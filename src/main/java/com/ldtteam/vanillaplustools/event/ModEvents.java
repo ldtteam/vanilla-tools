@@ -6,8 +6,6 @@ import com.ldtteam.vanillaplustools.items.ModHammerItem;
 import com.ldtteam.vanillaplustools.items.ModShovelItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -31,15 +29,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ldtteam.vanillaplustools.ModTags.CAN_HAMMER;
+import static com.ldtteam.vanillaplustools.ModTags.CAN_SHOVEL;
+
 @Mod.EventBusSubscriber
 public class ModEvents
 {
-    /**
-     * Tags.
-     */
-    private static final ResourceLocation CAN_HAMMER = new ResourceLocation("vanillaplustools", "can_hammer");
-    private static final ResourceLocation CAN_SHOVEL = new ResourceLocation("vanillaplustools", "can_shovel");
-
     /**
      * Event when a block is broken.
      *
@@ -71,8 +66,8 @@ public class ModEvents
 
     private static boolean isBestTool(final BlockState target, final LevelAccessor level, final BlockPos pos, final ItemStack stack, final Player player)
     {
-        if ((stack.getItem() instanceof ModHammerItem && BlockTags.getAllTags().getTag(CAN_HAMMER).contains(target.getBlock()))
-            || (stack.getItem() instanceof ModShovelItem && BlockTags.getAllTags().getTag(CAN_SHOVEL).contains(target.getBlock())))
+        if ((stack.getItem() instanceof ModHammerItem && target.is(CAN_HAMMER))
+            || (stack.getItem() instanceof ModShovelItem && target.is(CAN_SHOVEL)))
         {
             return true;
         }
