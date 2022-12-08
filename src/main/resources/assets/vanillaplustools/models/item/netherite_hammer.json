@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "vanillaplustools:items/netherite_hammer"
+    "layer0": "vanillaplustools:item/netherite_hammer"
   },
   "display": {
     "thirdperson": {

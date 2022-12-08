@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "vanillaplustools:items/diamond_hammer"
+    "layer0": "vanillaplustools:item/diamond_hammer"
   },
   "display": {
     "thirdperson": {

@@ -1,6 +1,5 @@
 package com.ldtteam.vanillaplustools.items;
 
-import com.ldtteam.vanillaplustools.creativetab.ModCreativeTabs;
 import com.ldtteam.vanillaplustools.event.ModEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -27,7 +26,7 @@ public class ModShovelItem extends ShovelItem
      */
     public ModShovelItem(final Tier tier, final float attackDamageIn, float attackSpeedIn)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(ModCreativeTabs.VANILLA_PLUS_TOOLS));
+        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties());
     }
 
     @Override

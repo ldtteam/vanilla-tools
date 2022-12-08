@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "vanillaplustools:items/diamond_shovel"
+    "layer0": "vanillaplustools:item/diamond_shovel"
   },
   "display": {
     "thirdperson": {

@@ -20,7 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -35,11 +35,6 @@ import static com.ldtteam.vanillaplustools.ModTags.CAN_SHOVEL;
 @Mod.EventBusSubscriber
 public class ModEvents
 {
-    /**
-     * Event when a block is broken.
-     *
-     * @param event {@link net.minecraftforge.event.world.BlockEvent.BreakEvent}
-     */
     @SubscribeEvent
     public static void onBlockBreak(@NotNull final BlockEvent.BreakEvent event)
     {
@@ -158,10 +153,10 @@ public class ModEvents
     @SubscribeEvent
     public static void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
     {
-        final ItemStack item = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
+        final ItemStack item = event.getEntity().getItemInHand(InteractionHand.MAIN_HAND);
         if (event.getPos() != null && (item.getItem() instanceof ModHammerItem || item.getItem() instanceof ModShovelItem))
         {
-            final Player player = event.getPlayer();
+            final Player player = event.getEntity();
             final Level level = player.getCommandSenderWorld();
             final BlockPos vector = event.getPos().subtract(new BlockPos(player.getX(), player.getY(), player.getZ()));
             final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
@@ -169,7 +164,7 @@ public class ModEvents
             for (BlockPos pos : getAffectedPos(player))
             {
                 final BlockState theBlock = level.getBlockState(pos);
-                if (isBestTool(theBlock, level, pos, item, event.getPlayer()))
+                if (isBestTool(theBlock, level, pos, item, event.getEntity()))
                 {
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, facing.get3DDataValue());
                     if (!level.isClientSide())
