@@ -158,7 +158,7 @@ public class ModEvents
         {
             final Player player = event.getEntity();
             final Level level = player.getCommandSenderWorld();
-            final BlockPos vector = event.getPos().subtract(new BlockPos(player.getX(), player.getY(), player.getZ()));
+            final BlockPos vector = event.getPos().subtract(player.blockPosition());
             final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
 
             for (BlockPos pos : getAffectedPos(player))
