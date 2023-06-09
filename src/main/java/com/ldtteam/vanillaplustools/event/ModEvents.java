@@ -81,7 +81,7 @@ public class ModEvents
         float sinPitch = Mth.sin(-pitch * 0.017453292F);
         float product = sinYaw * cosPitch;
         float product2 = cosYaw * cosPitch;
-        double reachDistance = player.getAttribute(ForgeMod.REACH_DISTANCE.get()).getValue();
+        double reachDistance = player.getBlockReach();
         Vec3 vec32 = vec3.add((double) product * reachDistance, (double) sinPitch * reachDistance, (double) product2 * reachDistance);
         return level.clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, mode, player));
     }
@@ -95,7 +95,7 @@ public class ModEvents
     public static List<BlockPos> getAffectedPos(@NotNull final Player player)
     {
         final List<BlockPos> list = new ArrayList<>();
-        final HitResult rayTrace = rayTrace(player.level, player, ClipContext.Fluid.NONE);
+        final HitResult rayTrace = rayTrace(player.level(), player, ClipContext.Fluid.NONE);
 
         if (rayTrace instanceof BlockHitResult)
         {
@@ -154,11 +154,11 @@ public class ModEvents
     public static void breakSpeed(@NotNull final PlayerEvent.BreakSpeed event)
     {
         final ItemStack item = event.getEntity().getItemInHand(InteractionHand.MAIN_HAND);
-        if (event.getPos() != null && (item.getItem() instanceof ModHammerItem || item.getItem() instanceof ModShovelItem))
+        if (event.getPosition().isPresent() && (item.getItem() instanceof ModHammerItem || item.getItem() instanceof ModShovelItem))
         {
             final Player player = event.getEntity();
             final Level level = player.getCommandSenderWorld();
-            final BlockPos vector = event.getPos().subtract(player.blockPosition());
+            final BlockPos vector = event.getPosition().get().subtract(player.blockPosition());
             final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
 
             for (BlockPos pos : getAffectedPos(player))
