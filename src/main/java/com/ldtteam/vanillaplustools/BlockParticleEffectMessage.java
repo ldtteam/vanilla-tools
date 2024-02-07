@@ -1,19 +1,20 @@
-package com.ldtteam.vanillaplustools.coremod.network;
+package com.ldtteam.vanillaplustools;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Handles the server telling nearby clients to render a particle effect.
  */
-public class BlockParticleEffectMessage implements IMessage
+public class BlockParticleEffectMessage implements IClientBoundDistributor
 {
+    public static final ResourceLocation ID = new ResourceLocation(VanillaPlusTools.MOD_ID, "block_particle_effect_message");
+
     /**
      * The position.
      */
@@ -27,9 +28,14 @@ public class BlockParticleEffectMessage implements IMessage
     /**
      * Default constructor.
      */
-    public BlockParticleEffectMessage()
+    public BlockParticleEffectMessage(@NotNull final FriendlyByteBuf buf)
     {
         super();
+        final int x = buf.readInt();
+        final int y = buf.readInt();
+        final int z = buf.readInt();
+        pos = new BlockPos(x, y, z);
+        side = buf.readInt();
     }
 
     /**
@@ -40,39 +46,28 @@ public class BlockParticleEffectMessage implements IMessage
      */
     public BlockParticleEffectMessage(final BlockPos pos, final int side)
     {
+        super();
         this.pos = pos;
         this.side = side;
     }
 
-    @Override
-    public void fromBytes(@NotNull final FriendlyByteBuf buf)
+    public void onExecute(@NotNull final PlayPayloadContext ctxIn)
     {
-        final int x = buf.readInt();
-        final int y = buf.readInt();
-        final int z = buf.readInt();
-        pos = new BlockPos(x, y, z);
-        side = buf.readInt();
-    }
-
-    @Nullable
-    @Override
-    public LogicalSide getExecutionSide()
-    {
-        return LogicalSide.CLIENT;
+        ctxIn.workHandler().execute(() -> Minecraft.getInstance().particleEngine.crack(pos, Direction.values()[side]));
     }
 
     @Override
-    public void onExecute(final NetworkEvent.Context ctxIn, final boolean isLogicalServer)
-    {
-        Minecraft.getInstance().particleEngine.crack(pos, Direction.values()[side]);
-    }
-
-    @Override
-    public void toBytes(@NotNull final FriendlyByteBuf buf)
+    public void write(final FriendlyByteBuf buf)
     {
         buf.writeInt(pos.getX());
         buf.writeInt(pos.getY());
         buf.writeInt(pos.getZ());
         buf.writeInt(side);
+    }
+
+    @Override
+    public ResourceLocation id()
+    {
+        return ID;
     }
 }

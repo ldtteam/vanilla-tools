@@ -1,9 +1,5 @@
-package com.ldtteam.vanillaplustools.event;
+package com.ldtteam.vanillaplustools;
 
-import com.ldtteam.vanillaplustools.coremod.network.BlockParticleEffectMessage;
-import com.ldtteam.vanillaplustools.coremod.network.Network;
-import com.ldtteam.vanillaplustools.items.ModHammerItem;
-import com.ldtteam.vanillaplustools.items.ModShovelItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -15,15 +11,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -101,6 +97,7 @@ public class ModEvents
         {
             final BlockHitResult rayTraceResult = (BlockHitResult) rayTrace;
             final BlockPos center = rayTraceResult.getBlockPos();
+            list.add(center);
             switch (rayTraceResult.getDirection())
             {
                 case DOWN:
@@ -160,7 +157,6 @@ public class ModEvents
             final Level level = player.getCommandSenderWorld();
             final BlockPos vector = event.getPosition().get().subtract(player.blockPosition());
             final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
-
             for (BlockPos pos : getAffectedPos(player))
             {
                 final BlockState theBlock = level.getBlockState(pos);
@@ -169,7 +165,7 @@ public class ModEvents
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, facing.get3DDataValue());
                     if (!level.isClientSide())
                     {
-                        Network.getNetwork().sendToPosition(pEM, new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
+                        pEM.sendToSpherePoint(new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
                     }
                 }
             }

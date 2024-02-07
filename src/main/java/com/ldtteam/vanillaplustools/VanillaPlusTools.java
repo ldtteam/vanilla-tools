@@ -1,16 +1,17 @@
 package com.ldtteam.vanillaplustools;
 
-import com.ldtteam.vanillaplustools.event.LifeCycleEvents;
-import com.ldtteam.vanillaplustools.event.ModEvents;
-import com.ldtteam.vanillaplustools.items.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class VanillaPlusTools
 
     public static final DeferredRegister<CreativeModeTab> TAB_REG       = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, VanillaPlusTools.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> VANILLA_PLUS_TAB = TAB_REG.register(MOD_ID, () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VANILLA_PLUS_TAB = TAB_REG.register(MOD_ID, () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
       CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModItems.DIAMOND_HAMMER.get())).displayItems((config, builder) -> {
         builder.accept(ModItems.WOODEN_HAMMER.get());
         builder.accept(ModItems.STONE_HAMMER.get());
@@ -45,9 +46,18 @@ public class VanillaPlusTools
     public VanillaPlusTools()
     {
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(ModEvents.class);
-        Mod.EventBusSubscriber.Bus.MOD.bus().get().register(LifeCycleEvents.class);
         Mod.EventBusSubscriber.Bus.MOD.bus().get().register(VanillaPlusTools.class);
+
         TAB_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
+
+    @SubscribeEvent
+    public static void onNetworkRegistry(final RegisterPayloadHandlerEvent event)
+    {
+        final String modVersion = ModList.get().getModContainerById(MOD_ID).get().getModInfo().getVersion().toString();
+        final IPayloadRegistrar registry = event.registrar(MOD_ID).versioned(modVersion);
+
+        registry.play(BlockParticleEffectMessage.ID, BlockParticleEffectMessage::new, h -> h.client(BlockParticleEffectMessage::onExecute));
     }
 }
