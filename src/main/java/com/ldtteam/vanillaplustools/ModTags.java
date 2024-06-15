@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags
 {
-    public static TagKey<Block> CAN_HAMMER = TagKey.create(Registries.BLOCK, new ResourceLocation("vanillaplustools", "can_hammer"));
-    public static TagKey<Block> CAN_SHOVEL = TagKey.create(Registries.BLOCK, new ResourceLocation("vanillaplustools", "can_shovel"));
+    public static TagKey<Block> CAN_HAMMER = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("vanillaplustools", "can_hammer"));
+    public static TagKey<Block> CAN_SHOVEL = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("vanillaplustools", "can_shovel"));
 }

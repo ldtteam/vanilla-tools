@@ -20,12 +20,10 @@ public class ModShovelItem extends ShovelItem
      * Setups the tool.
      *
      * @param tier           the tier of it.
-     * @param attackDamageIn the incoming attack damage.
-     * @param attackSpeedIn  the attack speed.
      */
-    public ModShovelItem(final Tier tier, final float attackDamageIn, float attackSpeedIn)
+    public ModShovelItem(final Tier tier)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties());
+        super(tier, new Item.Properties());
     }
 
     @Override
@@ -59,8 +57,7 @@ public class ModShovelItem extends ShovelItem
                                 level.setBlock(pos, state, 11);
                             }
                         }
-                        context.getItemInHand().hurtAndBreak(1, player, (p) ->
-                                p.broadcastBreakEvent(context.getHand()));
+                        context.getItemInHand().hurtAndBreak(1, player, context.getItemInHand().getEquipmentSlot());
                         return InteractionResult.CONSUME;
                     }
                 }

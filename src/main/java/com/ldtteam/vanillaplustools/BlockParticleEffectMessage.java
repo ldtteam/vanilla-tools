@@ -4,16 +4,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Handles the server telling nearby clients to render a particle effect.
  */
-public class BlockParticleEffectMessage implements IClientBoundDistributor
+public class BlockParticleEffectMessage implements CustomPacketPayload
 {
-    public static final ResourceLocation ID = new ResourceLocation(VanillaPlusTools.MOD_ID, "block_particle_effect_message");
+    public static final Type<BlockParticleEffectMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(VanillaPlusTools.MOD_ID, "block_particle_effect_message"));
 
     /**
      * The position.
@@ -51,13 +52,12 @@ public class BlockParticleEffectMessage implements IClientBoundDistributor
         this.side = side;
     }
 
-    public void onExecute(@NotNull final PlayPayloadContext ctxIn)
+    public void onExecute(@NotNull final IPayloadContext ctxIn)
     {
-        ctxIn.workHandler().execute(() -> Minecraft.getInstance().particleEngine.crack(pos, Direction.values()[side]));
+        ctxIn.enqueueWork(() -> Minecraft.getInstance().particleEngine.crack(pos, Direction.values()[side]));
     }
 
-    @Override
-    public void write(final FriendlyByteBuf buf)
+    public void write(FriendlyByteBuf buf)
     {
         buf.writeInt(pos.getX());
         buf.writeInt(pos.getY());
@@ -66,8 +66,8 @@ public class BlockParticleEffectMessage implements IClientBoundDistributor
     }
 
     @Override
-    public ResourceLocation id()
+    public Type<? extends CustomPacketPayload> type()
     {
-        return ID;
+        return TYPE;
     }
 }

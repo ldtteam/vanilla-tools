@@ -1,15 +1,17 @@
 package com.ldtteam.vanillaplustools;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.apache.logging.log4j.LogManager;
@@ -43,21 +45,21 @@ public class VanillaPlusTools
     /**
      * Constructor to initiate this.
      */
-    public VanillaPlusTools()
+    public VanillaPlusTools(IEventBus bus)
     {
-        Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(ModEvents.class);
-        Mod.EventBusSubscriber.Bus.MOD.bus().get().register(VanillaPlusTools.class);
+        NeoForge.EVENT_BUS.register(ModEvents.class);
+        bus.register(VanillaPlusTools.class);
 
-        TAB_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TAB_REG.register(bus);
+        ModItems.ITEMS.register(bus);
     }
 
     @SubscribeEvent
-    public static void onNetworkRegistry(final RegisterPayloadHandlerEvent event)
-    {
-        final String modVersion = ModList.get().getModContainerById(MOD_ID).get().getModInfo().getVersion().toString();
-        final IPayloadRegistrar registry = event.registrar(MOD_ID).versioned(modVersion);
+    public static void onNetworkSetup(final RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
 
-        registry.play(BlockParticleEffectMessage.ID, BlockParticleEffectMessage::new, h -> h.client(BlockParticleEffectMessage::onExecute));
+        registrar.playToClient(BlockParticleEffectMessage.TYPE,
+          StreamCodec.of((RegistryFriendlyByteBuf buf, BlockParticleEffectMessage packet) -> packet.write(buf), BlockParticleEffectMessage::new),
+          BlockParticleEffectMessage::onExecute);
     }
 }

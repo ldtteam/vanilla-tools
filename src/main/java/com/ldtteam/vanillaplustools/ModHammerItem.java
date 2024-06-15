@@ -14,12 +14,10 @@ public class ModHammerItem extends PickaxeItem
      * Setups the tool.
      *
      * @param tier           the tier of it.
-     * @param attackDamageIn the incoming attack damage.
-     * @param attackSpeedIn  the attack speed.
      */
-    public ModHammerItem(final Tier tier, final int attackDamageIn, float attackSpeedIn)
+    public ModHammerItem(final Tier tier)
     {
-        super(tier, attackDamageIn, attackSpeedIn, new Item.Properties());
+        super(tier, new Item.Properties());
     }
 
     @Override

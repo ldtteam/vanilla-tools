@@ -2,6 +2,7 @@ package com.ldtteam.vanillaplustools;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -11,12 +12,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -28,7 +28,7 @@ import java.util.List;
 import static com.ldtteam.vanillaplustools.ModTags.CAN_HAMMER;
 import static com.ldtteam.vanillaplustools.ModTags.CAN_SHOVEL;
 
-@Mod.EventBusSubscriber
+@EventBusSubscriber
 public class ModEvents
 {
     @SubscribeEvent
@@ -77,7 +77,8 @@ public class ModEvents
         float sinPitch = Mth.sin(-pitch * 0.017453292F);
         float product = sinYaw * cosPitch;
         float product2 = cosYaw * cosPitch;
-        double reachDistance = player.getBlockReach();
+
+        double reachDistance = Math.max(player.blockInteractionRange(), player.entityInteractionRange());
         Vec3 vec32 = vec3.add((double) product * reachDistance, (double) sinPitch * reachDistance, (double) product2 * reachDistance);
         return level.clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, mode, player));
     }
@@ -165,7 +166,7 @@ public class ModEvents
                     final BlockParticleEffectMessage pEM = new BlockParticleEffectMessage(pos, facing.get3DDataValue());
                     if (!level.isClientSide())
                     {
-                        pEM.sendToSpherePoint(new PacketDistributor.TargetPoint(pos.getX(), pos.getY(), pos.getZ(), 10, level.dimension()));
+                        PacketDistributor.sendToPlayersNear((ServerLevel) level, null, pos.getX(), pos.getY(), pos.getZ(), 10, pEM);
                     }
                 }
             }
