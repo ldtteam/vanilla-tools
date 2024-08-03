@@ -10,8 +10,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.NotNull;
 
 public class ModShovelItem extends ShovelItem
@@ -27,9 +27,9 @@ public class ModShovelItem extends ShovelItem
     }
 
     @Override
-    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ToolAction toolAction)
+    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ItemAbility toolAction)
     {
-        return ToolActions.DEFAULT_SHOVEL_ACTIONS.contains(toolAction);
+        return ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(toolAction);
     }
 
     @NotNull

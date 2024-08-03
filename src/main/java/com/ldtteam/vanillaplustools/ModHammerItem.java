@@ -4,8 +4,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.NotNull;
 
 public class ModHammerItem extends PickaxeItem
@@ -21,8 +21,8 @@ public class ModHammerItem extends PickaxeItem
     }
 
     @Override
-    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ToolAction toolAction)
+    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ItemAbility toolAction)
     {
-        return toolAction == ToolActions.PICKAXE_DIG;
+        return toolAction == ItemAbilities.PICKAXE_DIG;
     }
 }
