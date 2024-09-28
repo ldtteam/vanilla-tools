@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "vanillaplustools:wooden_shovel",
+    "vanillaplustools:stone_shovel",
+    "vanillaplustools:iron_shovel",
+    "vanillaplustools:gold_shovel",
+    "vanillaplustools:diamond_shovel",
+    "vanillaplustools:netherite_shovel"
+  ]
+}

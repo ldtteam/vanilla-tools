@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "vanillaplustools:wooden_hammer",
+    "vanillaplustools:stone_hammer",
+    "vanillaplustools:iron_hammer",
+    "vanillaplustools:gold_hammer",
+    "vanillaplustools:diamond_hammer",
+    "vanillaplustools:netherite_hammer"
+  ]
+}

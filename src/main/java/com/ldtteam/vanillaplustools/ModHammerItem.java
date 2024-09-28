@@ -1,9 +1,6 @@
 package com.ldtteam.vanillaplustools;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +14,7 @@ public class ModHammerItem extends PickaxeItem
      */
     public ModHammerItem(final Tier tier)
     {
-        super(tier, new Item.Properties());
+        super(tier, new Item.Properties().attributes(PickaxeItem.createAttributes(tier, 1.0F, -2.8F)));
     }
 
     @Override

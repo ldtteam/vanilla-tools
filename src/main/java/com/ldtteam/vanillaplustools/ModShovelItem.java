@@ -1,8 +1,10 @@
 package com.ldtteam.vanillaplustools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 public class ModShovelItem extends ShovelItem
@@ -23,7 +26,7 @@ public class ModShovelItem extends ShovelItem
      */
     public ModShovelItem(final Tier tier)
     {
-        super(tier, new Item.Properties());
+        super(tier, new Item.Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F)));
     }
 
     @Override
