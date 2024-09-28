@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:golden_shovel"
+      "item": "minecraft:stone_shovel"
     }
   },
   "result": {
-    "item": "vanillaplustools:gold_shovel"
+    "id": "vanillaplustools:stone_shovel"
   }
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:iron_pickaxe"
+      "item": "minecraft:netherite_pickaxe"
     }
   },
   "result": {
-    "item": "vanillaplustools:iron_hammer"
+    "id": "vanillaplustools:netherite_hammer"
   }
 }

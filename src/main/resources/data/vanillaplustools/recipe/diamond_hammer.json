@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:diamond_shovel"
+      "item": "minecraft:diamond_pickaxe"
     }
   },
   "result": {
-    "item": "vanillaplustools:diamond_shovel"
+    "id": "vanillaplustools:diamond_hammer"
   }
 }
