@@ -4,6 +4,7 @@ import com.ldtteam.vanillaplustools.event.LifeCycleEvents;
 import com.ldtteam.vanillaplustools.event.ModEvents;
 import com.ldtteam.vanillaplustools.items.ModItems;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -22,8 +23,7 @@ public class VanillaPlusTools
 
     public static final DeferredRegister<CreativeModeTab> TAB_REG       = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, VanillaPlusTools.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> VANILLA_PLUS_TAB = TAB_REG.register(MOD_ID, () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
-      CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModItems.DIAMOND_HAMMER.get())).displayItems((config, builder) -> {
+    public static final RegistryObject<CreativeModeTab> VANILLA_PLUS_TAB = TAB_REG.register(MOD_ID, () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).title(Component.literal("Vanilla+ Tools")).icon(() -> new ItemStack(ModItems.DIAMOND_HAMMER.get())).displayItems((config, builder) -> {
         builder.accept(ModItems.WOODEN_HAMMER.get());
         builder.accept(ModItems.STONE_HAMMER.get());
         builder.accept(ModItems.IRON_HAMMER.get());
