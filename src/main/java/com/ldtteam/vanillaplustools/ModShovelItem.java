@@ -4,7 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -22,11 +23,11 @@ public class ModShovelItem extends ShovelItem
     /**
      * Setups the tool.
      *
-     * @param tier           the tier of it.
+     * @param material           the tier of it.
      */
-    public ModShovelItem(final Tier tier)
-    {
-        super(tier, new Item.Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F)));
+    public ModShovelItem(Item.Properties props, ToolMaterial material) {
+        // ShovelItem in 1.21.8: (ToolMaterial, float dmg, float speed, Item.Properties)
+        super(material, 1.5F, -3.0F, props);
     }
 
     @Override
