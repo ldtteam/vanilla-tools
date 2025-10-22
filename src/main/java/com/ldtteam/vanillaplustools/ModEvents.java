@@ -40,7 +40,7 @@ public class ModEvents
             if (item.getItem() instanceof ModHammerItem || item.getItem() instanceof ModShovelItem)
             {
                 final ItemStack mainHand = event.getPlayer().getMainHandItem();
-                final Level level = event.getPlayer().getCommandSenderWorld();
+                final Level level = (Level) event.getLevel();
                 final double hardness = event.getState().getDestroySpeed(level, event.getPos());
                 for (BlockPos pos : getAffectedPos(event.getPlayer()))
                 {
@@ -155,9 +155,9 @@ public class ModEvents
         if (event.getPosition().isPresent() && (item.getItem() instanceof ModHammerItem || item.getItem() instanceof ModShovelItem))
         {
             final Player player = event.getEntity();
-            final Level level = player.getCommandSenderWorld();
+            final Level level = event.getEntity().level();
             final BlockPos vector = event.getPosition().get().subtract(player.blockPosition());
-            final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ()).getOpposite();
+            final Direction facing = Direction.getNearest(vector.getX(), vector.getY(), vector.getZ(), player.getDirection()).getOpposite();
             for (BlockPos pos : getAffectedPos(player))
             {
                 final BlockState theBlock = level.getBlockState(pos);
