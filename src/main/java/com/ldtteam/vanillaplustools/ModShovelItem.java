@@ -19,11 +19,12 @@ public class ModShovelItem extends ShovelItem
     /**
      * Setups the tool.
      *
-     * @param tier           the tier of it.
+     * @param prop
+     * @param tier the tier of it.
      */
-    public ModShovelItem(final ToolMaterial tier)
+    public ModShovelItem(final Properties prop, final ToolMaterial tier)
     {
-        super(tier, 1.5F, -3.0F, new Item.Properties());
+        super(tier, 1.5F, -3.0F, prop);
     }
 
     @Override
