@@ -37,7 +37,7 @@ public class ModShovelItem extends ShovelItem
     @Override
     public InteractionResult useOn(final UseOnContext context)
     {
-        if (!context.getLevel().isClientSide)
+        if (!context.getLevel().isClientSide())
         {
             final ItemStack item = context.getItemInHand();
             if (item.getItem() instanceof ModShovelItem)

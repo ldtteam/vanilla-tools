@@ -54,7 +54,7 @@ public class BlockParticleEffectMessage implements CustomPacketPayload
 
     public void onExecute(@NotNull final IPayloadContext ctxIn)
     {
-        ctxIn.enqueueWork(() -> Minecraft.getInstance().particleEngine.crack(pos, Direction.values()[side]));
+        ctxIn.enqueueWork(() -> Minecraft.getInstance().level.addBreakingBlockEffect(pos, Direction.values()[side]));
     }
 
     public void write(FriendlyByteBuf buf)
