@@ -6,11 +6,9 @@
     "XXX"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:wooden_pickaxe"
-    }
+    "X": "minecraft:golden_pickaxe"
   },
   "result": {
-    "id": "vanillaplustools:wooden_hammer"
+    "id": "vanillaplustools:gold_hammer"
   }
 }
