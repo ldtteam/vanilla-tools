@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -60,7 +61,7 @@ public class ModShovelItem extends ShovelItem
                                 level.setBlock(pos, state, 11);
                             }
                         }
-                        context.getItemInHand().hurtAndBreak(1, player, context.getItemInHand().getEquipmentSlot());
+                        context.getItemInHand().hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
                         return InteractionResult.CONSUME;
                     }
                 }
