@@ -28,9 +28,9 @@ public class ModShovelItem extends ShovelItem
     }
 
     @Override
-    public boolean canPerformAction(@NotNull final ItemStack stack, @NotNull final ItemAbility toolAction)
+    public boolean canPerformAction(final ItemInstance stack, final ItemAbility itemAbility)
     {
-        return ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(toolAction);
+        return ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility);
     }
 
     @NotNull

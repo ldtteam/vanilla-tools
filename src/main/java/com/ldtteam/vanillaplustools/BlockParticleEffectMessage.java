@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BlockParticleEffectMessage implements CustomPacketPayload
 {
-    public static final Type<BlockParticleEffectMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(VanillaPlusTools.MOD_ID, "block_particle_effect_message"));
+    public static final Type<BlockParticleEffectMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(VanillaPlusTools.MOD_ID, "block_particle_effect_message"));
 
     /**
      * The position.
